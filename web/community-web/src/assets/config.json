@@ -1,0 +1,16 @@
+{
+  "name": "Swap",
+  "tagline": "A community-driven event for sharing and reuse.",
+  "logoUrl": "https://cliftonparkny.gov/images/logo/logo_cropped.png",
+  "itemName": "Stuff",
+  "homeLocation": {
+    "adr": "Clifton Park, NY",
+    "lat": 42.85906441954508,
+    "lng": -73.81971101464801
+  },
+  "theme": {
+    "primary": "#22c55e",
+    "secondary": "#15803d",
+    "accent": "#f59e0b"
+  }
+}
