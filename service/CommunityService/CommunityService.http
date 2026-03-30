@@ -1,0 +1,35 @@
+@CommunityService_HostAddress = http://localhost:5162/map/community/v1
+
+# Community Service Status
+GET {{CommunityService_HostAddress}}/status/
+Accept: application/json
+
+###
+
+# Community Service Streets
+GET {{CommunityService_HostAddress}}/streets/
+Accept: application/json
+ApiKey: 00000000000000000000000000000000
+
+###
+
+# Community Service Streets
+GET {{CommunityService_HostAddress}}/query?street=brittany
+Accept: application/json
+ApiKey: 00000000000000000000000000000000
+
+###
+
+# Community Service Streets
+GET {{CommunityService_HostAddress}}/location?lat=123.456&lng=789.001
+Accept: application/json
+ApiKey: 00000000000000000000000000000000
+
+###
+
+# Dbx Extension Status
+GET {{CommunityService_HostAddress}}/dbx/status/
+Accept: application/json
+
+###
+
