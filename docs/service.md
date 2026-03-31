@@ -45,7 +45,7 @@ An *apikey* is expected in the API_KEY header.
 All endpoints return a Json response message as follows:
 ```json
 {
-    "success": true|false,
+    "isSuccess": true|false,
     "data": { ... }
 }
 ```

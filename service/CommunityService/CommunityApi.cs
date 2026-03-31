@@ -22,53 +22,42 @@ internal class CommunityApi
         _jsonOptions = jsonOptions;
     }
 
-    internal async Task<IResult> GetVersionAsync(HttpContext context, string apiKey)
-    {
-        LogApiRequest(context);
-        if (_isDevelopment || apiKey == _apiKey)
-        {
-            return Results.Ok(CommunityResponse.IsSuccess(new CommunityVersion()));
-        }
-        _logger.LogError("CommunityService, {caller}, {ip}, {key}, INVALID API KEY", nameof(GetVersionAsync), context.Connection.RemoteIpAddress, apiKey);
-        return Results.NotFound();  // Do NOT return regular response; when API KEY is always indicate nothing ever found
-    }
+    internal Task<IResult> GetVersionAsync(HttpContext context, string apiKey)
+        => HandleApiRequest(context, apiKey, nameof(GetVersionAsync), async () =>
+            Results.Ok(CommunityResponse.Success(new CommunityVersion())));
 
-    internal async Task<IResult> GetStreetsAsync(HttpContext context, string apiKey)
-    {
-        LogApiRequest(context);
-        if (_isDevelopment || apiKey == _apiKey)
+    internal Task<IResult> GetStreetsAsync(HttpContext context, string apiKey)
+        => HandleApiRequest(context, apiKey, nameof(GetStreetsAsync), async () =>
         {
             var filePath = Path.Combine(_env.ContentRootPath, "Assets", "streets.json");
             var content = await File.ReadAllTextAsync(filePath);
             var streets = JsonSerializer.Deserialize<List<string>>(content, _jsonOptions);
-            return Results.Ok(CommunityResponse.IsSuccess(streets));
-        }
-        _logger.LogError("CommunityService, {caller}, {ip}, {key}, INVALID API KEY", nameof(GetStreetsAsync), context.Connection.RemoteIpAddress, apiKey);
-        return Results.NotFound();  // Do NOT return regular response; when API KEY is always indicate nothing ever found
-    }
+            return Results.Ok(CommunityResponse.Success(streets));
+        });
 
-    internal async Task<IResult> QueryLocationAsync(HttpContext context, string apiKey, string street)
-    {
-        LogApiRequest(context);
-        if (_isDevelopment || apiKey == _apiKey)
+    internal Task<IResult> QueryLocationAsync(HttpContext context, string apiKey, string street)
+        => HandleApiRequest(context, apiKey, nameof(QueryLocationAsync), async () =>
         {
             var locations = _locations ??= await ReadLocationsAsync();
             return Results.Ok(new CommunityMatchCollection(locations.Take(12)));
-        }
-        _logger.LogError("CommunityService, {caller}, {ip}, {key}, INVALID API KEY", nameof(QueryLocationAsync), context.Connection.RemoteIpAddress, apiKey);
-        return Results.NotFound();  // Do NOT return regular response; when API KEY is always indicate nothing ever found
-    }
+        });
 
-    internal async Task<IResult> QueryLocationAsync(HttpContext context, string apiKey, double lat, double lng)
-    {
-        LogApiRequest(context);
-        if (_isDevelopment || apiKey == _apiKey)
+    internal Task<IResult> QueryLocationAsync(HttpContext context, string apiKey, double lat, double lng)
+        => HandleApiRequest(context, apiKey, nameof(QueryLocationAsync), async () =>
         {
             var locations = _locations ??= await ReadLocationsAsync();
             return Results.Ok(new CommunityMatchCollection(locations.Take(2)));
+        });
+
+    private async Task<IResult> HandleApiRequest(HttpContext context, string apiKey, string callerName, Func<Task<IResult>> onAuthorized)
+    {
+        LogApiRequest(context, callerName);
+        if (_isDevelopment || apiKey == _apiKey)
+        {
+            return await onAuthorized();
         }
-        _logger.LogError("CommunityService, {caller}, {ip}, {key}, INVALID API KEY", nameof(QueryLocationAsync), context.Connection.RemoteIpAddress, apiKey);
-        return Results.NotFound();  // Do NOT return regular response; when API KEY is always indicate nothing ever found
+        _logger.LogError("CommunityService, {caller}, {ip}, {key}, INVALID API KEY", callerName, context.Connection.RemoteIpAddress, apiKey);
+        return Results.NotFound();
     }
 
     private void LogApiRequest(HttpContext context, [CallerMemberName] string callerName = "")

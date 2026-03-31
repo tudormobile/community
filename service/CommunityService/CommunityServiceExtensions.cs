@@ -33,7 +33,7 @@ public static class CommunityServiceExtensions
         app.MapGet($"{prefix}/location", (HttpContext context, [FromHeader(Name = "ApiKey")] string? apiKey, [FromQuery] double lat, [FromQuery] double lng)
             => api.QueryLocationAsync(context, apiKey ?? string.Empty, lat, lng));
 
-        app.Logger.LogInformation("CommunityService, Running");
+        app.Logger.LogInformation("CommunityService, Running, {prefix}", prefix);
         return app;
     }
 }

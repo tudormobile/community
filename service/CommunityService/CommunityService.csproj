@@ -9,6 +9,7 @@
     <PackageReference Include="Tudormobile.Dbx" Version="0.2.0" />
   </ItemGroup>
   <ItemGroup>
+    <InternalsVisibleTo Include="$(MSBuildProjectName).Tests" />
     <Folder Include="Assets\" />
   </ItemGroup>
 </Project>
