@@ -1,0 +1,4 @@
+<Solution>
+    <Project Name="CommunityService" Path="CommunityService\CommunityService.csproj" />
+    <Project Name="CommunityService.Tests" Path="CommunityService.Tests\CommunityService.Tests.csproj" />
+</Solution>

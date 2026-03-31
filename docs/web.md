@@ -30,7 +30,7 @@ Documentation or a link to the documentation goes here.
 Use this section pattern for future tools.
 
 ```markdown
-## App: <ToolName>
+## App: <AppName>
 
 ### Summary
 <1-2 sentence purpose>

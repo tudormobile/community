@@ -12,6 +12,7 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
+    "@tudormobile/dbx-vue": "^0.2.0",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "leaflet": "^1.9.4",
     "leaflet.locatecontrol": "^0.89.0",
