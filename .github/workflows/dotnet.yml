@@ -52,11 +52,6 @@ jobs:
           cd service
           dotnet test --filter "TestCategory!=Integration" --coverage --report-trx
 
-      - name: Build
-        run: |
-          cd service
-          dotnet build -c Release
-
       - name: Unit Test Annotations
         run: |
           cd service
@@ -85,12 +80,16 @@ jobs:
           echo "### Code Coverage" >> "$GITHUB_STEP_SUMMARY"
           grep -oP '<summary>\K.+%(?=</summary>)' output/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
 
+      - name: Publish
+        run: |
+          cd service
+          dotnet publish CommunityService/CommunityService.csproj -c Release -o publish
+          echo "${{ steps.version_step.outputs.semVer }}" > publish/ver.txt
+
       - name: Create Zip for Release
         run: |
-          TEMP_DIR=$(mktemp -d)
-          find service -name "*.nupkg" -ipath "*/bin/release/*" -exec cp {} "$TEMP_DIR/" \;
-          zip -j "$GITHUB_WORKSPACE/package.zip" "$TEMP_DIR"/*
-          rm -rf "$TEMP_DIR"
+          cd service
+          zip -r "$GITHUB_WORKSPACE/package.zip" publish/
 
       - name: Upload Release Zip
         uses: actions/upload-artifact@v4
