@@ -63,7 +63,9 @@ jobs:
         VITE_APP_VERSION: ${{ steps.version_step.outputs.semVer }}
 
     - name: Create zip archive
-      run: zip -r "$GITHUB_WORKSPACE/community-web-dist.zip" dist/
+      run: |
+        cd dist
+        zip -r "$GITHUB_WORKSPACE/community-web-dist.zip" .
         
     - name: Upload dist artifact
       uses: actions/upload-artifact@v6
