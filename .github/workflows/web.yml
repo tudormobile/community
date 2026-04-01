@@ -45,7 +45,7 @@ jobs:
       uses: gittools/actions/gitversion/execute@v4
       
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version: '22.x'
         cache: 'npm'
@@ -66,7 +66,7 @@ jobs:
       run: zip -r "$GITHUB_WORKSPACE/community-web-dist.zip" dist/
         
     - name: Upload dist artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: community-web-dist
         path: community-web-dist.zip
@@ -98,7 +98,7 @@ jobs:
         id: version_step
         uses: gittools/actions/gitversion/execute@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '22.x'
           cache: 'npm'
@@ -107,7 +107,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Download dist artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: community-web-dist
           path: community-web-dist

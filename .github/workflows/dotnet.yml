@@ -89,10 +89,11 @@ jobs:
       - name: Create Zip for Release
         run: |
           cd service
-          zip -r "$GITHUB_WORKSPACE/package.zip" publish/
+          cd publish
+          zip -r "$GITHUB_WORKSPACE/package.zip" .
 
       - name: Upload Release Zip
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: release-zip
           path: package.zip
