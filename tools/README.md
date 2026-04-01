@@ -5,7 +5,7 @@ Tools and utilities to support community applications.
 
 ### Build and Test
 
-#### Compile and unit test
+#### Compile
 ```sh
 dotnet build nys_sam_addresses
 ```

@@ -24,25 +24,25 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@5
+        uses: actions/setup-dotnet@4
         with:
           dotnet-version: 10.x.x
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup GitVersion
-        uses: gittools/actions/gitversion/setup@4
+        uses: gittools/actions/gitversion/setup@v4
         with:
           versionSpec: '6.4.0'
 
       - name: Determine Version
         id: version_step
-        uses: gittools/actions/gitversion/execute@4
+        uses: gittools/actions/gitversion/execute@v4
         with:
           updateProjectFiles: true
 
@@ -92,7 +92,7 @@ jobs:
           rm -rf "$TEMP_DIR"
 
       - name: Upload Release Zip
-        uses: actions/upload-artifact@7
+        uses: actions/upload-artifact@v4
         with:
           name: release-zip
           path: package.zip
@@ -109,7 +109,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Setup .NET
@@ -118,13 +118,13 @@ jobs:
           dotnet-version: 10.x.x
 
       - name: Setup GitVersion
-        uses: gittools/actions/gitversion/setup@4
+        uses: gittools/actions/gitversion/setup@v4
         with:
           versionSpec: '6.4.0'
 
       - name: Determine Version
         id: release_version_step
-        uses: gittools/actions/gitversion/execute@4
+        uses: gittools/actions/gitversion/execute@v4
 
       - name: Resolve Release Tag
         id: release_tag
@@ -132,7 +132,7 @@ jobs:
           echo "release_tag=v${{ steps.release_version_step.outputs.semVer }}" >> $GITHUB_OUTPUT
 
       - name: Download Release Zip Artifact
-        uses: actions/download-artifact@8
+        uses: actions/download-artifact@v8
         with:
           name: release-zip
           path: release-zip
