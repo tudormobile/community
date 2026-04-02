@@ -13,7 +13,7 @@ public class CommunityResponseTests
     }
 
     [TestMethod]
-    public void Constructor_WIthPropertues_Initializes()
+    public void Constructor_WithProperties_Initializes()
     {
         var data = new object();
         var success = true;

@@ -1,5 +1,9 @@
 ﻿namespace Tudormobile.CommunityService;
 
+/// <summary>
+/// Represents a standardized response from the Community Service API.
+/// </summary>
+/// <typeparam name="T">The type of data contained in the response.</typeparam>
 public sealed record CommunityResponse<T>
 {
     /// <summary>

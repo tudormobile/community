@@ -79,6 +79,92 @@ The match object is as follows:
     "lng": -73.77874189662009
 }
 ```
+## Query Endpoints
+### 1. Street Query - Smart Filtering
+
+#### Features:
+✅ **Empty/Whitespace Handling**
+- Returns empty collection if street is null, empty, or whitespace
+- Trims input to handle leading/trailing spaces
+
+✅ **Exact Match Priority**
+- First checks for exact address matches (case-insensitive)
+- Returns immediately with `isExact=true` if found
+
+✅ **Partial Match Fallback**
+- If no exact match, searches for partial matches
+- Uses `Contains` with case-insensitive comparison
+- Limits results to 12 locations
+- Returns with `isExact=false`
+
+#### Example Behavior:
+```csharp
+// Exact match
+"123 Main St" → Returns only "123 Main St" with isExact=true
+
+// Partial match
+"Main" → Returns all addresses containing "Main" (up to 12) with isExact=false
+
+// Case-insensitive
+"main st", "MAIN ST", "Main St" → All return same results
+
+// Empty input
+"", "   " → Returns empty collection
+```
+
+### 2. Coordinate Query - Distance-Based Search
+
+#### Features:
+✅ **Haversine Distance Calculation**
+- Calculates great-circle distance between query point and all locations
+- Accounts for Earth's curvature
+- Returns distance in kilometers
+
+✅ **Nearest First Ordering**
+- Sorts locations by distance (nearest first)
+- Returns top 12 closest locations
+
+✅ **Exact Match Detection**
+- Checks if any location is within 0.0001 degrees (~11 meters)
+- Sets `isExact=true` if found
+
+#### Algorithm:
+```csharp
+1. Load all locations
+2. Calculate distance from (lat, lng) to each location
+3. Sort by distance (ascending)
+4. Take first 12 locations
+5. Check if closest is within 0.0001° → isExact
+6. Return sorted collection
+```
+
+### 3. Distance Calculation - Haversine Formula
+
+#### Implementation:
+```csharp
+private static double CalculateDistance(double lat1, double lng1, double lat2, double lng2)
+{
+    const double earthRadiusKm = 6371.0;
+    var dLat = DegreesToRadians(lat2 - lat1);
+    var dLng = DegreesToRadians(lng2 - lng1);
+
+    var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+            Math.Cos(DegreesToRadians(lat1)) * Math.Cos(DegreesToRadians(lat2)) *
+            Math.Sin(dLng / 2) * Math.Sin(dLng / 2);
+
+    var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+    return earthRadiusKm * c;
+}
+```
+
+**Accuracy:** ±0.5% error for most distances on Earth
+
+## Future Enhancements
+1. Add radius parameter to coordinate query (e.g., "within 10km")
+2. Add pagination for partial matches (currently hard-coded to 12)
+3. Consider caching distance calculations for frequently queried points
+4. Add fuzzy matching for street names (Levenshtein distance)
+5. Add lat/lng validation (-90 to 90, -180 to 180)
 
 #### Additional Endpoints
 Additional endpoints are exposed by the [Dbx package](https://github.com/tudormobile/dbx/).  

@@ -34,5 +34,4 @@ app.UseAuthorization();
 // map for use in the Tudormobile API host (testing purposes)
 app.UseCommunityService();
 
-app.UseHttpsRedirection();
 app.Run();

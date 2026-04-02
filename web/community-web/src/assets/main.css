@@ -1,35 +1,161 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+	width: 100%;
+	min-height: 100vh;
+	padding: 1rem 0.9rem 1.5rem;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+main,
+section,
+.about,
+.items-view,
+.address,
+.streets,
+.items-list,
+.items-map {
+	width: 100%;
+	max-width: 42rem;
+	margin: 0 auto;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+main,
+.about,
+.items-view,
+.address,
+.streets,
+.items-list {
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-md);
+	padding: 1rem;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+h1 {
+	margin: 0 0 0.6rem;
+	font-size: clamp(1.35rem, 5.5vw, 1.9rem);
 }
+
+h2 {
+	margin: 0;
+	font-size: clamp(1.05rem, 4.8vw, 1.35rem);
+}
+
+h3 {
+	margin: 0;
+	font-size: 1rem;
+}
+
+p {
+	margin: 0;
+	color: var(--text);
+}
+
+p + p {
+	margin-top: 0.45rem;
+}
+
+button,
+input {
+	font: inherit;
+}
+
+button {
+	min-height: 2.7rem;
+	padding: 0.6rem 0.95rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	color: var(--text-strong);
+	background: var(--surface-soft);
+}
+
+button:active {
+	transform: translateY(1px);
+}
+
+input {
+	min-height: 2.75rem;
+	padding: 0.65rem 0.8rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	color: var(--text-strong);
+	background: #fff;
+}
+
+input:focus-visible,
+button:focus-visible {
+	outline: 2px solid color-mix(in srgb, var(--brand) 65%, white);
+	outline-offset: 2px;
+}
+
+.items-view {
+	gap: 0.9rem;
+}
+
+.items-view > p {
+	color: var(--text-muted);
+}
+
+.items-toggle {
+	width: 100%;
+	max-width: 18rem;
+}
+
+.items-toggle .toggle-button {
+	min-height: 2.6rem;
+}
+
+.marker-row {
+	background: var(--surface-soft);
+	border-color: var(--line);
+	border-radius: var(--radius-md);
+}
+
+.empty-state {
+	color: var(--text-muted);
+}
+
+.error {
+	color: var(--danger);
+}
+
+.refresh {
+	border-color: var(--line);
+	background: color-mix(in srgb, var(--brand) 10%, white);
+}
+
+.search-input {
+	max-width: 100%;
+}
+
+ul {
+	margin: 0.2rem 0 0;
+	padding-left: 1rem;
+}
+
+li + li {
+	margin-top: 0.28rem;
+}
+
+.items-map {
+	padding: 0;
+	border: 0;
+	box-shadow: none;
+}
+
+@media (max-width: 24rem) {
+	#app {
+		padding-inline: 0.65rem;
+	}
+
+	main,
+	.about,
+	.items-view,
+	.address,
+	.streets,
+	.items-list {
+		padding: 0.85rem;
+	}
+}
+

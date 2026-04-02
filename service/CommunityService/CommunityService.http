@@ -21,7 +21,7 @@ ApiKey: 00000000000000000000000000000000
 ###
 
 # Community Service Streets
-GET {{CommunityService_HostAddress}}/location?lat=123.456&lng=789.001
+GET {{CommunityService_HostAddress}}/location?lat=42.845704&lng=-73.829558
 Accept: application/json
 ApiKey: 00000000000000000000000000000000
 
