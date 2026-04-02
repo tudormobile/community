@@ -13,6 +13,7 @@ internal class CommunityApi
 
     public CommunityApi(string apiKey, ILogger logger, IWebHostEnvironment env, JsonSerializerOptions jsonOptions)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(apiKey, nameof(apiKey));
         _apiKey = apiKey;
         _logger = logger;
         _env = env;
@@ -49,7 +50,7 @@ internal class CommunityApi
 
                 if (string.IsNullOrWhiteSpace(street))
                 {
-                    return Results.Ok(new CommunityMatchCollection([]));
+                    return Results.Ok(CommunityResponse.Success(new CommunityMatchCollection([])));
                 }
 
                 var searchTerm = street.Trim();
@@ -59,7 +60,7 @@ internal class CommunityApi
 
                 if (exactMatches.Count > 0)
                 {
-                    return Results.Ok(new CommunityMatchCollection(exactMatches, isExactMatch: true));
+                    return Results.Ok(CommunityResponse.Success(new CommunityMatchCollection(exactMatches, isExactMatch: true)));
                 }
 
                 var partialMatches = locations
@@ -67,11 +68,12 @@ internal class CommunityApi
                     .Take(12)
                     .ToList();
 
-                return Results.Ok(new CommunityMatchCollection(partialMatches, isExactMatch: false));
+                return Results.Ok(CommunityResponse.Success(new CommunityMatchCollection(partialMatches, isExactMatch: false)));
             }
             catch (Exception ex)
             {
-                return Results.Ok(CommunityResponse.Failure(ex.Message));
+                LogException(context, ex);
+                return Results.Ok(CommunityResponse.Failure("Unable to query locations."));
             }
         });
 
@@ -94,11 +96,12 @@ internal class CommunityApi
                     .ToList();
 
                 var isExact = nearbyLocations.Any(l => Math.Abs(l.Lat - lat) < 0.0001 && Math.Abs(l.Lng - lng) < 0.0001);
-                return Results.Ok(new CommunityMatchCollection(nearbyLocations, isExactMatch: isExact));
+                return Results.Ok(CommunityResponse.Success(new CommunityMatchCollection(nearbyLocations, isExactMatch: isExact)));
             }
             catch (Exception ex)
             {
-                return Results.Ok(CommunityResponse.Failure(ex.Message));
+                LogException(context, ex);
+                return Results.Ok(CommunityResponse.Failure("Unable to query locations."));
             }
         });
 
@@ -116,6 +119,12 @@ internal class CommunityApi
     private void LogApiRequest(HttpContext context, [CallerMemberName] string callerName = "")
     {
         _logger.LogInformation("CommunityService, {callerName}, {remoteIpAddress}",
+            callerName, context.Connection.RemoteIpAddress);
+    }
+
+    private void LogException(HttpContext context, Exception ex, [CallerMemberName] string callerName = "")
+    {
+        _logger.LogError(ex, "CommunityService, {callerName}, {remoteIpAddress}",
             callerName, context.Connection.RemoteIpAddress);
     }
 

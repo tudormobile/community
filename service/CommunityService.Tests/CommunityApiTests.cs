@@ -47,24 +47,6 @@ public class CommunityApiTests
         }
     }
 
-    [AssemblyCleanup]
-    public static void AssemblyCleanup()
-    {
-        // Clean up shared assets directory
-        try
-        {
-            var assetsPath = Path.Combine(Directory.GetCurrentDirectory(), "Assets");
-            if (Directory.Exists(assetsPath))
-            {
-                Directory.Delete(assetsPath, recursive: true);
-            }
-        }
-        catch
-        {
-            // Ignore cleanup errors
-        }
-    }
-
     #region GetVersionAsync Tests
 
     [TestMethod]
@@ -76,7 +58,7 @@ public class CommunityApiTests
         // Assert
         Assert.IsNotNull(result);
         Assert.IsInstanceOfType<IResult>(result);
-        
+
         // Verify logging occurred
         Assert.IsTrue(_logger.LoggedMessages.Any(m => m.Contains("GetVersionAsync")));
     }
@@ -89,7 +71,7 @@ public class CommunityApiTests
 
         // Assert
         Assert.IsNotNull(result);
-        
+
         // Verify error was logged
         Assert.IsTrue(_logger.LoggedLevels.Contains(LogLevel.Error));
         Assert.IsTrue(_logger.LoggedMessages.Any(m => m.Contains("INVALID API KEY")));
@@ -103,7 +85,7 @@ public class CommunityApiTests
 
         // Assert
         Assert.IsNotNull(result);
-        
+
         // Verify error was logged
         Assert.IsTrue(_logger.LoggedLevels.Contains(LogLevel.Error));
     }
@@ -131,11 +113,11 @@ public class CommunityApiTests
         // Arrange
         var testAssetsPath = Path.Combine(_environment.ContentRootPath, "Assets");
         Directory.CreateDirectory(testAssetsPath);
-        
+
         var streetsData = new List<string> { "Main Street", "Oak Avenue", "Park Boulevard" };
         var json = JsonSerializer.Serialize(streetsData, _jsonOptions);
         var streetsFile = Path.Combine(testAssetsPath, "streets.json");
-        
+
         try
         {
             await File.WriteAllTextAsync(streetsFile, json);
@@ -161,7 +143,7 @@ public class CommunityApiTests
         // Arrange - Ensure assets directory doesn't exist or file doesn't exist
         var testAssetsPath = Path.Combine(_environment.ContentRootPath, "Assets");
         var streetsFile = Path.Combine(testAssetsPath, "streets.json");
-        
+
         if (File.Exists(streetsFile))
             File.Delete(streetsFile);
 
@@ -190,9 +172,9 @@ public class CommunityApiTests
         // Arrange
         var testAssetsPath = Path.Combine(_environment.ContentRootPath, "Assets");
         Directory.CreateDirectory(testAssetsPath);
-        
+
         var streetsFile = Path.Combine(testAssetsPath, "streets.json");
-        
+
         try
         {
             await File.WriteAllTextAsync(streetsFile, "{ invalid json }");

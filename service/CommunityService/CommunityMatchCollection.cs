@@ -18,7 +18,7 @@ public class CommunityMatchCollection
     /// <summary>
     /// Initializes a new instance of the <see cref="CommunityMatchCollection"/> class with no matches.
     /// </summary>
-    internal CommunityMatchCollection()
+    public CommunityMatchCollection()
     {
         Matches = [];
         IsExact = false;

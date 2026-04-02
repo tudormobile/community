@@ -79,7 +79,7 @@ The match object is as follows:
     "lng": -73.77874189662009
 }
 ```
-#### Query Endpoints
+## Query Endpoints
 ### 1. Street Query - Smart Filtering
 
 #### Features:
@@ -89,21 +89,21 @@ The match object is as follows:
 
 ✅ **Exact Match Priority**
 - First checks for exact address matches (case-insensitive)
-- Returns immediately with `isExactMatch=true` if found
+- Returns immediately with `isExact=true` if found
 
 ✅ **Partial Match Fallback**
 - If no exact match, searches for partial matches
 - Uses `Contains` with case-insensitive comparison
 - Limits results to 12 locations
-- Returns with `isExactMatch=false`
+- Returns with `isExact=false`
 
 #### Example Behavior:
 ```csharp
 // Exact match
-"123 Main St" → Returns only "123 Main St" with isExactMatch=true
+"123 Main St" → Returns only "123 Main St" with isExact=true
 
 // Partial match
-"Main" → Returns all addresses containing "Main" (up to 12) with isExactMatch=false
+"Main" → Returns all addresses containing "Main" (up to 12) with isExact=false
 
 // Case-insensitive
 "main st", "MAIN ST", "Main St" → All return same results
@@ -126,7 +126,7 @@ The match object is as follows:
 
 ✅ **Exact Match Detection**
 - Checks if any location is within 0.0001 degrees (~11 meters)
-- Sets `isExactMatch=true` if found
+- Sets `isExact=true` if found
 
 #### Algorithm:
 ```csharp
