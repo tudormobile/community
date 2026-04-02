@@ -3,9 +3,6 @@
 [TestClass]
 public class CommunityLocationTests
 {
-    //    public string Adr { get; init; } = string.Empty;
-    //    public double Lat { get; init; }
-    //    public double Lng { get; init; }
     [TestMethod]
     public void Construct_SetsDefaultValues()
     {

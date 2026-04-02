@@ -5,8 +5,16 @@ using Tudormobile.Dbx;
 
 namespace Tudormobile.CommunityService;
 
+/// <summary>
+/// Extension methods for configuring Community Service endpoints.
+/// </summary>
 public static class CommunityServiceExtensions
 {
+    /// <summary>
+    /// Configures and maps Community Service API endpoints to the application.
+    /// </summary>
+    /// <param name="app">The web application to configure.</param>
+    /// <returns>The configured web application for method chaining.</returns>
     public static WebApplication UseCommunityService(this WebApplication app)
     {
         var prefix = "/map/community/v1";
@@ -16,7 +24,7 @@ public static class CommunityServiceExtensions
         var jsonOptions = app.Services.GetRequiredService<IOptions<JsonOptions>>();
 
         var api = new CommunityApi(
-            app.Configuration.GetSection("Community")["ApiKey"] ?? String.Empty,
+            app.Configuration.GetSection("Community")["ApiKey"] ?? string.Empty,
             app.Logger,
             app.Environment, jsonOptions?.Value.JsonSerializerOptions ?? new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 
