@@ -1,12 +1,16 @@
 {
   "name": "community-web",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "author": "Copyright (c) 2026 Bill Tudor",
   "type": "module",
   "scripts": {
     "host": "vite --host",
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "gen-version": "node scripts/gen-version.js",
+    "build": "run-s gen-version build-parallel",
+    "build-parallel": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build"
