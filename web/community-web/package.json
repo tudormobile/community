@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": false,
   "license": "MIT",
-  "author": "Copyright (c) 2026 Bill Tudor",
+  "author": "Bill Tudor",
+  "copyright": "Copyright (c) 2026 Bill Tudor",
   "type": "module",
   "scripts": {
     "host": "vite --host",
