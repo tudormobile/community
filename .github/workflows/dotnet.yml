@@ -83,7 +83,7 @@ jobs:
       - name: Publish
         run: |
           cd service
-          dotnet publish CommunityService/CommunityService.csproj -c Release -o publish
+          dotnet publish CommunityService/CommunityService.csproj -c Release -o publish -p:UseAppHost=false
           echo "${{ steps.version_step.outputs.semVer }}" > publish/ver.txt
 
       - name: Create Zip for Release

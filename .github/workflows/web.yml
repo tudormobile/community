@@ -118,4 +118,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create -t "${{ steps.version_step.outputs.semVer }}-web" --generate-notes "v${{ steps.version_step.outputs.semVer }}-web" community-web-dist/community-web-dist.zip#package
+          gh release create -t "v${{ steps.version_step.outputs.semVer }}-web" --generate-notes "v${{ steps.version_step.outputs.semVer }}-web" community-web-dist/community-web-dist.zip#package
