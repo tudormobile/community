@@ -9,7 +9,7 @@
     "host": "vite --host",
     "dev": "vite",
     "gen-version": "node scripts/gen-version.js",
-    "build": "run-s gen-version build-parallel",
+    "build": "run-s gen-version \"build-parallel {@}\" --",
     "build-parallel": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
