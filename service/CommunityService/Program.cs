@@ -1,4 +1,5 @@
 using Tudormobile.CommunityService;
+using Tudormobile.Dbx;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,7 @@ builder.Services.AddCors(options =>
 
 // Add Dbx and authorization for running under TudormoibleAPI and Dbx for storage.
 builder.Services.AddAuthorization();
-//builder.Services.AddDbx();
+builder.Services.AddDbx();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

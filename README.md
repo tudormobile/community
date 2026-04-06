@@ -10,11 +10,45 @@
 COPYRIGHT (C) BILL TUDOR
 
 ## Quick Start
-Quick start examples
-```
-go here
-```
+### Web App
+```sh
+git clone https://github.com/tudormobile/community.git
+cd web/community-web
+npm install
 
+npm run dev
+```
+### Web Service
+```cs
+using Tudormobile.CommunityService;
+using Tudormobile.Dbx;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.AddDbx();
+// ...
+var app = builder.Build();
+app.UseCommunityService();
+// ...
+app.Run();
+```
+Web Service Endpoints
+- api.tudormobile.com
+    - /[ category ]/[ service ]/[ .. ]
+
+```
+api.tudormobile.com
+    /api
+    /traffic
+    /transit
+    /weather
+    /map/
+        /community/v1 -> community service
+        /community/v1/dbx -> dbx service
+```
 ## Documentation
-The documentation goes here ...
+Community contains tools, services, and web apps for developing community based software solutions.
+
+* [Tools](docs/tools.md)
+* [Services](docs/service.md)
+* [Web Apps](docs/web.md)
 
