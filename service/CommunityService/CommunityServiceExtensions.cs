@@ -18,7 +18,13 @@ public static class CommunityServiceExtensions
     public static WebApplication UseCommunityService(this WebApplication app)
     {
         var prefix = "/map/community/v1";
-        app.UseDbx(prefix);
+
+        // Only call UseDbx if AddDbx was called (checks for IDbxService registration)
+        var serviceProviderIsService = app.Services.GetService<Microsoft.Extensions.DependencyInjection.IServiceProviderIsService>();
+        if (serviceProviderIsService?.IsService(typeof(IDbxService)) == true)
+        {
+            app.UseDbx(prefix);
+        }
 
         // Get the JsonOptions from DI
         var jsonOptions = app.Services.GetRequiredService<IOptions<JsonOptions>>();

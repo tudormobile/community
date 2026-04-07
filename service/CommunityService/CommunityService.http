@@ -3,6 +3,7 @@
 # Community Service Status
 GET {{CommunityService_HostAddress}}/status/
 Accept: application/json
+ApiKey: 00000000000000000000000000000000
 
 ###
 
@@ -30,6 +31,7 @@ ApiKey: 00000000000000000000000000000000
 # Dbx Extension Status
 GET {{CommunityService_HostAddress}}/dbx/status/
 Accept: application/json
+ApiKey: 00000000000000000000000000000000
 
 ###
 
