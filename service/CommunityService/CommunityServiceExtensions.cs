@@ -20,13 +20,10 @@ public static class CommunityServiceExtensions
         var prefix = "/map/community/v1";
 
         // Only call UseDbx if AddDbx was called (checks for IDbxService registration)
-        // Create a scope to resolve scoped services properly
-        using (var scope = app.Services.CreateScope())
+        var serviceProviderIsService = app.Services.GetService<Microsoft.Extensions.DependencyInjection.IServiceProviderIsService>();
+        if (serviceProviderIsService?.IsService(typeof(IDbxService)) == true)
         {
-            if (scope.ServiceProvider.GetService(typeof(IDbxService)) != null)
-            {
-                app.UseDbx(prefix);
-            }
+            app.UseDbx(prefix);
         }
 
         // Get the JsonOptions from DI
