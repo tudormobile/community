@@ -24,7 +24,7 @@ using Tudormobile.CommunityService;
 using Tudormobile.Dbx;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddDbx();
+builder.Services.AddDbx();
 // ...
 var app = builder.Build();
 app.UseCommunityService();
