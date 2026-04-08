@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView, useRoute } from 'vue-router'
-import { version } from '../package.json'
+import { version as pkgVersion } from '../package.json'
 import homeIcon from '@/assets/home.svg'
 import mapIcon from '@/assets/map.svg'
 import infoIcon from '@/assets/info.svg'
 
+const version = import.meta.env.VITE_APP_VERSION || pkgVersion
 const route = useRoute()
 </script>
 
