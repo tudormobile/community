@@ -24,10 +24,9 @@ const locationMarkers = [
 
 <template>
   <section class="items-view">
-    <h1>Items</h1>
-    <p>Switch between map and list views for the current items.</p>
-
-    <ItemsToggle v-model="viewMode" first-label="Map" second-label="List" :first-icon="mapIcon" :second-icon="listIcon" />
+    <div class="toggle-wrapper">
+      <ItemsToggle v-model="viewMode" first-label="Map" second-label="List" :first-icon="mapIcon" :second-icon="listIcon" />
+    </div>
 
     <ItemsMap v-if="viewMode === 'first'" :markers="locationMarkers" height="100%" />
     <ItemsList v-else :markers="locationMarkers" />
@@ -38,16 +37,25 @@ const locationMarkers = [
 .items-view {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  position: fixed;
+  top: calc(var(--top-bar-height) + env(safe-area-inset-top));
+  left: 0;
+  right: 0;
+  bottom: 4.5rem;
   overflow: hidden;
-  gap: 0.75rem;
   max-width: none;
   margin: 0;
-  padding: 1rem 0.9rem;
+  padding: 0;
+  gap: 0;
 }
 
 p {
   margin: 0;
+}
+
+.toggle-wrapper {
+  padding: 0.4rem 0;
+  flex-shrink: 0;
 }
 
 :deep(.items-list) {
@@ -60,5 +68,8 @@ p {
   flex: 1;
   min-height: 0;
   overflow: hidden;
+  max-width: none;
+  width: 100%;
+  margin: 0;
 }
 </style>

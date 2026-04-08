@@ -15,8 +15,10 @@ const viewMode = ref<'first' | 'second'>('first')
   <div class="events">
     <ItemsToggle v-model="viewMode" first-label="Calendar" second-label="Events" :first-icon="calendarIcon" :second-icon="listIcon" />
     <div class="events-content">
-      <Calendar v-if="viewMode === 'first'" :events="allEvents"/>
+      <Calendar v-if="viewMode === 'first'" :events="allEvents" />
       <EventList v-else :events="allEvents" />
+      <!--       TODO: add event details view/modal when an event is selected "EventList :events="allEvents" @select="selectedEvent = $event"
+ -->
     </div>
   </div>
 </template>
