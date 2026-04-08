@@ -1,20 +1,23 @@
 :root {
-  --bg-top: #f4f8ff;
+  --bg-top: #f0fdf4;
   --bg-bottom: #edfdf5;
   --surface: #ffffff;
   --surface-soft: #f7fafc;
+
   --text-strong: #13213a;
   --text: #31415f;
   --text-muted: #5b6884;
+
   --line: #d9e2ee;
-  --brand: #0d9488;
-  --brand-strong: #0f766e;
+  --brand: #16a34a;
+  --brand-strong: #15803d;
   --danger: #b42318;
   --radius-sm: 0.5rem;
   --radius-md: 0.85rem;
   --radius-lg: 1.1rem;
   --shadow-sm: 0 1px 3px rgba(8, 18, 38, 0.08);
   --shadow-md: 0 8px 22px rgba(8, 18, 38, 0.08);
+  --top-bar-height: 3.5rem;
 }
 
 * {

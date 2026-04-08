@@ -1,15 +1,26 @@
 <script setup lang="ts">
 import { RouterLink, RouterView, useRoute } from 'vue-router'
-import { version as pkgVersion } from '../package.json'
+import { version as pkgVersion, name as appName } from '../package.json'
+import type { AppConfig } from '@/types/config'
+import appConfig from '@/assets/config.json'
 import homeIcon from '@/assets/home.svg'
 import mapIcon from '@/assets/map.svg'
 import infoIcon from '@/assets/info.svg'
+import calendarIcon from '@/assets/calendar_month.svg'
 
 const version = import.meta.env.VITE_APP_VERSION || pkgVersion
 const route = useRoute()
 </script>
 
 <template>
+  <div class="top-bar">
+    <div class="top-bar-text">
+      <span class="top-bar-name">Community {{ (appConfig as AppConfig).name }}</span>
+      <span class="top-bar-tagline">{{ (appConfig as AppConfig).tagline }}</span>
+    </div>
+    <img v-if="(appConfig as AppConfig).logoUrl" :src="(appConfig as AppConfig).logoUrl" class="top-bar-logo" alt="logo" />
+  </div>
+
   <main-content :class="{ 'is-fixed': route.name === 'items' }">
     <RouterView />
   </main-content>
@@ -19,6 +30,10 @@ const route = useRoute()
       <RouterLink to="/" class="tab-item">
         <img :src="homeIcon" class="tab-icon" alt="" />
         <span class="tab-label">Home</span>
+      </RouterLink>
+      <RouterLink to="/events" class="tab-item">
+        <img :src="calendarIcon" class="tab-icon" alt="" />
+        <span class="tab-label">Events</span>
       </RouterLink>
       <RouterLink to="/items" class="tab-item">
         <img :src="mapIcon" class="tab-icon" alt="" />
@@ -30,6 +45,7 @@ const route = useRoute()
       </RouterLink>
     </nav>
     <footer class="app-footer">
+      <span>{{ appName }}</span>
       <span>Copyright &copy; 2026 Bill Tudor</span>
       <span>v{{ version }}</span>
     </footer>
@@ -37,14 +53,68 @@ const route = useRoute()
 </template>
 
 <style scoped>
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--brand);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(0.6rem + env(safe-area-inset-top)) 0.5rem 0.3rem 1rem;
+  box-shadow: 0 2px 8px rgba(8, 18, 38, 0.18);
+  gap: 0.5rem;
+}
+
+.top-bar-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.top-bar-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-bar-tagline {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-top: 0.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-bar-logo {
+  height: 2.4rem;
+  width: auto;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
 main-content {
   display: block;
-  padding-bottom: 5.5rem;
+  padding-top: calc(var(--top-bar-height) + env(safe-area-inset-top));
+  padding-bottom: 0.5rem;
 }
 
 main-content.is-fixed {
   position: fixed;
-  top: 0;
+  top: calc(var(--top-bar-height) + env(safe-area-inset-top));
   left: 0;
   right: 0;
   bottom: 4.5rem;
@@ -90,11 +160,10 @@ main-content.is-fixed {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 20%;
-  right: 20%;
+  left: 10%;
+  right: 10%;
   height: 3px;
-  background: var(--brand);
-  border-radius: 3px 3px 0 0;
+  background: var(--brand-strong);
   opacity: 0;
   transform: scaleX(0.4);
   transition: opacity 0.25s ease, transform 0.25s ease;

@@ -41,6 +41,7 @@ function select(value: ToggleValue) {
 </script>
 
 <template>
+	<div class="items-toggle-wrapper">
 	<div class="items-toggle" role="group" :aria-label="ariaLabel">
 		<button
 			type="button"
@@ -64,9 +65,16 @@ function select(value: ToggleValue) {
 			{{ secondLabel }}
 		</button>
 	</div>
+	</div>
 </template>
 
 <style scoped>
+.items-toggle-wrapper {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
 .items-toggle {
 	display: inline-grid;
 	grid-template-columns: 1fr 1fr;
