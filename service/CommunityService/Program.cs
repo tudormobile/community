@@ -15,7 +15,9 @@ builder.Services.AddCors(options =>
                 "https://tudormobile.com",
                 "https://tudorzone.com",
                 "https://localhost:5162",
-                "http://localhost:5162")
+                "http://localhost:5162",
+                "https://localhost:7043",
+                "http://localhost:5173")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
@@ -27,8 +29,8 @@ builder.Services.AddDbx();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseHttpsRedirection();
 app.UseCors("AllowSpecificOrigins");
+//app.UseHttpsRedirection();
 app.UseAuthorization();
 
 // map for use in the Tudormobile API host (testing purposes)

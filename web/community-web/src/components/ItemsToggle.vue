@@ -7,6 +7,8 @@ const props = withDefaults(
 	defineProps<{
 		firstLabel: string
 		secondLabel: string
+		firstIcon?: string
+		secondIcon?: string
 		modelValue?: ToggleValue
 		ariaLabel?: string
 	}>(),
@@ -47,6 +49,7 @@ function select(value: ToggleValue) {
 			:aria-pressed="selected === 'first'"
 			@click="select('first')"
 		>
+			<img v-if="firstIcon" :src="firstIcon" class="toggle-icon" alt="" />
 			{{ firstLabel }}
 		</button>
 
@@ -57,6 +60,7 @@ function select(value: ToggleValue) {
 			:aria-pressed="selected === 'second'"
 			@click="select('second')"
 		>
+			<img v-if="secondIcon" :src="secondIcon" class="toggle-icon" alt="" />
 			{{ secondLabel }}
 		</button>
 	</div>
@@ -78,6 +82,9 @@ function select(value: ToggleValue) {
 	border-radius: 999px;
 	padding: 0.45rem 0.9rem;
 	background: transparent;
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
 	color: #475467;
 	font-weight: 600;
 	cursor: pointer;
@@ -92,5 +99,15 @@ function select(value: ToggleValue) {
 	background: #ffffff;
 	color: #101828;
 	box-shadow: 0 1px 2px rgba(16, 24, 40, 0.12);
+}
+
+.toggle-icon {
+	width: 1rem;
+	height: 1rem;
+	opacity: 0.6;
+}
+
+.toggle-button.active .toggle-icon {
+	opacity: 1;
 }
 </style>
