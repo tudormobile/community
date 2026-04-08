@@ -1,6 +1,6 @@
 export interface ApiResponse<T> {
   isSuccess: boolean
-  data: T | string
+  data: T | string | null
 }
 
 export interface ServiceVersion {
