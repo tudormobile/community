@@ -61,6 +61,11 @@ jobs:
       run: npm run build
       env:
         VITE_APP_VERSION: ${{ steps.version_step.outputs.semVer }}
+        VITE_API_APP_NAME: ${{ vars.VITE_API_APP_NAME }}
+        VITE_API_KEY_NAME: ${{ vars.VITE_API_KEY_NAME }}
+        VITE_API_KEY_VALUE: ${{ secrets.VITE_API_KEY_VALUE }}
+        VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+        VITE_API_ADDITIONAL_HEADERS: ${{ secrets.VITE_API_ADDITIONAL_HEADERS }}
 
     - name: Create zip archive
       run: |
