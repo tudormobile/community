@@ -1,15 +1,19 @@
+<script setup lang="ts">
+import AboutCommunity from '@/components/AboutCommunity.vue';
+import AboutApp from '@/components/AboutApp.vue';
+</script>
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <AboutApp />
+    <AboutCommunity />
   </div>
 </template>
 
 <style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
 }
 </style>

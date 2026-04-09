@@ -6,6 +6,7 @@ export interface AppConfig {
   logoUrl: string;
   itemName: string;
   homeLocation: LocationData;
+  description: string;
   theme: {
     primary: string;
     secondary: string;

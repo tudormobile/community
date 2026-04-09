@@ -3,10 +3,10 @@ import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { version as pkgVersion, name as appName } from '../package.json'
 import type { AppConfig } from '@/types/config'
 import appConfig from '@/assets/config.json'
-import homeIcon from '@/assets/home.svg'
-import mapIcon from '@/assets/map.svg'
-import infoIcon from '@/assets/info.svg'
-import calendarIcon from '@/assets/calendar_month.svg'
+import homeIcon from '@/assets/icons/home.svg'
+import mapIcon from '@/assets/icons/map.svg'
+import infoIcon from '@/assets/icons/info.svg'
+import calendarIcon from '@/assets/icons/calendar_month.svg'
 
 const version = import.meta.env.VITE_APP_VERSION || pkgVersion
 const route = useRoute()
@@ -21,9 +21,9 @@ const route = useRoute()
     <img v-if="(appConfig as AppConfig).logoUrl" :src="(appConfig as AppConfig).logoUrl" class="top-bar-logo" alt="" />
   </div>
 
-  <main-content :class="{ 'is-fixed': route.name === 'items' }">
+  <div class="main-content" :class="{ 'is-fixed': route.name === 'items' }">
     <RouterView />
-  </main-content>
+  </div>
 
   <div class="bottom-bar">
     <nav class="tab-nav">
@@ -106,13 +106,13 @@ const route = useRoute()
   object-fit: contain;
 }
 
-main-content {
+.main-content {
   display: block;
   padding-top: calc(var(--top-bar-height) + env(safe-area-inset-top));
-  padding-bottom: 0.5rem;
+  padding-bottom: 4.5rem;
 }
 
-main-content.is-fixed {
+.main-content.is-fixed {
   position: fixed;
   top: calc(var(--top-bar-height) + env(safe-area-inset-top));
   left: 0;
