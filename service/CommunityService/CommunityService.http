@@ -35,3 +35,11 @@ ApiKey: 00000000000000000000000000000000
 
 ###
 
+# Dbx List announcements Status
+GET {{CommunityService_HostAddress}}/dbx/community/2b394650b277e000326337a5a2905f62bdae4c96cfbc319c5738a2b6a4c1c228
+Accept: application/json
+ApiKey: 00000000000000000000000000000000
+
+###
+
+

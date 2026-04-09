@@ -21,9 +21,9 @@ const route = useRoute()
     <img v-if="(appConfig as AppConfig).logoUrl" :src="(appConfig as AppConfig).logoUrl" class="top-bar-logo" alt="" />
   </div>
 
-  <main-content :class="{ 'is-fixed': route.name === 'items' }">
+  <div class="main-content" :class="{ 'is-fixed': route.name === 'items' }">
     <RouterView />
-  </main-content>
+  </div>
 
   <div class="bottom-bar">
     <nav class="tab-nav">
@@ -106,13 +106,13 @@ const route = useRoute()
   object-fit: contain;
 }
 
-main-content {
+.main-content {
   display: block;
   padding-top: calc(var(--top-bar-height) + env(safe-area-inset-top));
   padding-bottom: 4.5rem;
 }
 
-main-content.is-fixed {
+.main-content.is-fixed {
   position: fixed;
   top: calc(var(--top-bar-height) + env(safe-area-inset-top));
   left: 0;

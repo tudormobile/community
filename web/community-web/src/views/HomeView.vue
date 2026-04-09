@@ -1,17 +1,25 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import type { ApiResponse, ServiceVersion } from '@/types/api'
-import ItemsList from '@/components/ItemsList.vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import type { DbxResponse, Announcement } from '@/types/api'
+import Notice from '@/components/Notice.vue'
 
-const status = ref<ServiceVersion | null>(null)
+import type { AppConfig } from '@/types/config'
+import appConfig from '@/assets/config.json'
+
+const announcementsId = '2b394650b277e000326337a5a2905f62bdae4c96cfbc319c5738a2b6a4c1c228'
+const config = appConfig as AppConfig
+
+const announcements = ref<Announcement[] | null>(null)
 const error = ref<string | null>(null)
 
-onMounted(async () => {
+let pollTimer: ReturnType<typeof setInterval>
+
+async function fetchAnnouncements() {
   try {
     const additionalHeaders: Record<string, string> = JSON.parse(
       import.meta.env.VITE_API_ADDITIONAL_HEADERS
     )
-    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/status`, {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/dbx/community/${announcementsId}`, {
       headers: {
         [import.meta.env.VITE_API_KEY_NAME]: import.meta.env.VITE_API_KEY_VALUE,
         ...additionalHeaders,
@@ -21,33 +29,57 @@ onMounted(async () => {
       error.value = `Request failed: ${response.status} ${response.statusText}`
       return
     }
-    const result: ApiResponse<ServiceVersion> = await response.json()
-    if (result.isSuccess) {
-      status.value = result.data as ServiceVersion
+    const result: DbxResponse<Announcement[]> = await response.json()
+    if (result.success && Array.isArray(result.data)) {
+      announcements.value = result.data as Announcement[]
     } else {
       error.value = result.data as string
     }
   } catch (e) {
     error.value = e instanceof Error ? e.message : 'Unknown error'
   }
+}
+
+function onVisibilityChange() {
+  if (document.visibilityState === 'visible') fetchAnnouncements()
+}
+
+onMounted(() => {
+  fetchAnnouncements()
+  pollTimer = setInterval(fetchAnnouncements, 30 * 60 * 1000)
+  document.addEventListener('visibilitychange', onVisibilityChange)
+})
+
+onUnmounted(() => {
+  clearInterval(pollTimer)
+  document.removeEventListener('visibilitychange', onVisibilityChange)
 })
 </script>
 
 <template>
   <main>
-    <h1>Community Service Status</h1>
-    <div v-if="error" class="error">{{ error }}</div>
-    <dl v-else-if="status">
-      <dt>Name</dt>
-      <dd>{{ status.name }}</dd>
-      <dt>Description</dt>
-      <dd>{{ status.description }}</dd>
-      <dt>Copyright</dt>
-      <dd>{{ status.copyright }}</dd>
-      <dt>Version</dt>
-      <dd>{{ status.version }}</dd>
-    </dl>
-    <p v-else>Loading...</p>
-    
+    <div>{{ config.description }}</div>
   </main>
+  <div v-if="error" class="message">{{ error }}</div>
+  <div v-else-if="announcements && announcements.length === 0" class="message">No announcements.</div>
+  <div v-else-if="announcements && announcements?.length > 0">
+    <ul>
+      <li v-for="announcement in announcements" :key="announcement.id">
+        <Notice :title="announcement.title" :content="announcement.content" :date="announcement.date" />
+      </li>
+    </ul>
+  </div>
 </template>
+<style scoped>
+.message {
+  color: var(--text-subtle);
+  font-size: 0.75rem;
+  margin: 0.25rem 1.0rem;
+  text-align: center;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 2rem;
+}
+</style>

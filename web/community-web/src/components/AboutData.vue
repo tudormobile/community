@@ -49,21 +49,25 @@ onMounted(async () => {
             <span>Version:</span>
             <span v-if="status" class="status">{{ status.version }}</span>
             <span v-if="!status && !error" class="query">Checking...</span>
+            <span v-if="!status && error" class="status">Unknown</span>
         </div>
         <div class="item">
             <span>Item Count:</span>
             <span v-if="itemCount !== null" class="status">{{ itemCount }}</span>
             <span v-if="itemCount === null && !error" class="query">Checking...</span>
+            <span v-if="itemCount === null && error" class="status">Unknown</span>
         </div>
         <div class="item">
             <span>Event Count:</span>
             <span v-if="eventCount !== null" class="status">{{ eventCount }}</span>
             <span v-if="eventCount === null && !error" class="query">Checking...</span>
+            <span v-if="eventCount === null && error" class="status">Unknown</span>
         </div>
         <div class="item">
-            <span>Announcements:</span>
+            <span>Notices:</span>
             <span v-if="announcementCount !== null" class="status">{{ announcementCount }}</span>
             <span v-if="announcementCount === null && !error" class="query">Checking...</span>
+            <span v-if="announcementCount === null && error" class="status">Unknown</span>
         </div>
     </div>
 </template>

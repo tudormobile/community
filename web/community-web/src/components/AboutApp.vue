@@ -15,6 +15,12 @@ const config = appConfig as AppConfig
             </div>
         </div>
         <div class="body">{{ config.description }}</div>
+        <dl>
+            <dt>Item Name</dt>
+            <dd>{{config.name}} - {{ config.itemName }}</dd>
+            <dt>Location</dt>
+            <dd>{{ config.homeLocation.adr}} ({{ config.homeLocation.lat.toFixed(3) }},{{ config.homeLocation.lng.toFixed(3) }})</dd>
+        </dl>
     </div>
 </template>
 <style scoped>
@@ -24,23 +30,29 @@ const config = appConfig as AppConfig
     gap: 0.0rem;
     align-items: flex-start;
 }
+
 .title {
     font-size: 1rem;
     font-weight: bold;
 }
+
 .subtitle {
     font-size: 0.75rem;
     color: var(--text-muted);
 }
+
 .body {
     padding: 0.5rem 0;
     font-size: 0.875rem;
     color: var(--text);
 }
+
 .logo {
     width: 4rem;
     height: 4rem;
 }
-
-
+dl {
+    margin: 0;
+    font-size: 0.75rem;
+}
 </style>
