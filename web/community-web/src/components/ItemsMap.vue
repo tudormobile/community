@@ -50,7 +50,7 @@ const resolvedCenter = computed<[number, number]>(() => {
 })
 
 const mapStyle = computed(() => ({
-  height: props.height,
+  height: '100%',
   width: '100%',
 }))
 
@@ -60,6 +60,9 @@ async function onMapReady(map: LeafletMap) {
   }
 
   controlsInitialized = true
+
+  // Force Leaflet to recalculate tile grid against actual rendered container size
+  setTimeout(() => map.invalidateSize(), 0)
 
   const [{ control, Icon }, { LocateControl }] = await Promise.all([
     import('leaflet'),

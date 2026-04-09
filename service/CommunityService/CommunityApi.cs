@@ -112,19 +112,19 @@ internal class CommunityApi
         {
             return await onAuthorized();
         }
-        _logger.LogError("CommunityService, {caller}, {ip}, {key}, INVALID API KEY", callerName, context.Connection.RemoteIpAddress, apiKey);
+        _logger.LogError("CommunityService, {0}, {1}, {2}, INVALID API KEY", callerName, context.Connection.RemoteIpAddress, apiKey);
         return Results.NotFound();
     }
 
     private void LogApiRequest(HttpContext context, [CallerMemberName] string callerName = "")
     {
-        _logger.LogInformation("CommunityService, {callerName}, {remoteIpAddress}",
+        _logger.LogInformation("CommunityService, {0}, {1}",
             callerName, context.Connection.RemoteIpAddress);
     }
 
     private void LogException(HttpContext context, Exception ex, [CallerMemberName] string callerName = "")
     {
-        _logger.LogError(ex, "CommunityService, {callerName}, {remoteIpAddress}",
+        _logger.LogError(ex, "CommunityService, {0}, {1}",
             callerName, context.Connection.RemoteIpAddress);
     }
 
