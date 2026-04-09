@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import type { AppConfig } from '@/types/config'
 import appConfig from '@/assets/config.json'
+
+const config = appConfig as AppConfig
 </script>
 
 <template>
     <div class="about">
         <div style="display: flex; flex-direction: row; align-items: center;">
-            <span><img v-if="(appConfig as AppConfig).logoUrl" :src="(appConfig as AppConfig).logoUrl" class="logo" alt="" /></span>
+            <span><img v-if="config.logoUrl" :src="config.logoUrl" class="logo" alt="" /></span>
             <div style="display: flex; flex-direction: column; gap: 0.0rem; margin-left: 0.5rem;">
-                <span class="title">{{ appConfig.name }}</span>
-                <div class="subtitle">{{ appConfig.tagline }}</div>
+                <span class="title">{{ config.name }}</span>
+                <div class="subtitle">{{ config.tagline }}</div>
             </div>
         </div>
-        <div class="body">{{ appConfig.description }}</div>
+        <div class="body">{{ config.description }}</div>
     </div>
 </template>
 <style scoped>
