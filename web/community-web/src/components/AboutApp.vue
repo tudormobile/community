@@ -33,7 +33,7 @@ import appConfig from '@/assets/config.json'
 .body {
     padding: 0.5rem 0;
     font-size: 0.875rem;
-    color: var(--text-body);
+    color: var(--text);
 }
 .logo {
     width: 4rem;
