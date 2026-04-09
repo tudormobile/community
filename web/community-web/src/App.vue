@@ -18,7 +18,7 @@ const route = useRoute()
       <span class="top-bar-name">Community {{ (appConfig as AppConfig).name }}</span>
       <span class="top-bar-tagline">{{ (appConfig as AppConfig).tagline }}</span>
     </div>
-    <img v-if="(appConfig as AppConfig).logoUrl" :src="(appConfig as AppConfig).logoUrl" class="top-bar-logo" alt="logo" />
+    <img v-if="(appConfig as AppConfig).logoUrl" :src="(appConfig as AppConfig).logoUrl" class="top-bar-logo" alt="" />
   </div>
 
   <main-content :class="{ 'is-fixed': route.name === 'items' }">
