@@ -1,0 +1,44 @@
+<script setup lang="ts">
+import type { AppConfig } from '@/types/config'
+import appConfig from '@/assets/config.json'
+</script>
+
+<template>
+    <div class="about">
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <span><img v-if="(appConfig as AppConfig).logoUrl" :src="(appConfig as AppConfig).logoUrl" class="logo" alt="" /></span>
+            <div style="display: flex; flex-direction: column; gap: 0.0rem; margin-left: 0.5rem;">
+                <span class="title">{{ appConfig.name }}</span>
+                <div class="subtitle">{{ appConfig.tagline }}</div>
+            </div>
+        </div>
+        <div class="body">{{ appConfig.description }}</div>
+    </div>
+</template>
+<style scoped>
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: 0.0rem;
+    align-items: flex-start;
+}
+.title {
+    font-size: 1rem;
+    font-weight: bold;
+}
+.subtitle {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+.body {
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    color: var(--text-body);
+}
+.logo {
+    width: 4rem;
+    height: 4rem;
+}
+
+
+</style>

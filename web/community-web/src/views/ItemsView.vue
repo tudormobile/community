@@ -4,8 +4,8 @@ import configData from '@/assets/config.json'
 import ItemsList from '@/components/ItemsList.vue'
 import ItemsMap from '@/components/ItemsMap.vue'
 import ItemsToggle from '@/components/ItemsToggle.vue'
-import mapIcon from '@/assets/map.svg'
-import listIcon from '@/assets/list.svg'
+import mapIcon from '@/assets/icons/map.svg'
+import listIcon from '@/assets/icons/list.svg'
 import type { AppConfig } from '@/types/config'
 
 const appConfig = configData as AppConfig

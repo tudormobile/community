@@ -3,8 +3,8 @@ import { ref } from 'vue'
 import ItemsToggle from '@/components/ItemsToggle.vue'
 import Calendar from '@/components/Calendar.vue'
 import EventList from '@/components/EventList.vue'
-import calendarIcon from '@/assets/calendar_month.svg'
-import listIcon from '@/assets/list.svg'
+import calendarIcon from '@/assets/icons/calendar_month.svg'
+import listIcon from '@/assets/icons/list.svg'
 import type { CalendarEvent } from '@/types/calendarEvent'
 
 const allEvents = ref<CalendarEvent[]>([])

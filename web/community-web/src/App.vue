@@ -3,10 +3,10 @@ import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { version as pkgVersion, name as appName } from '../package.json'
 import type { AppConfig } from '@/types/config'
 import appConfig from '@/assets/config.json'
-import homeIcon from '@/assets/home.svg'
-import mapIcon from '@/assets/map.svg'
-import infoIcon from '@/assets/info.svg'
-import calendarIcon from '@/assets/calendar_month.svg'
+import homeIcon from '@/assets/icons/home.svg'
+import mapIcon from '@/assets/icons/map.svg'
+import infoIcon from '@/assets/icons/info.svg'
+import calendarIcon from '@/assets/icons/calendar_month.svg'
 
 const version = import.meta.env.VITE_APP_VERSION || pkgVersion
 const route = useRoute()
@@ -109,7 +109,7 @@ const route = useRoute()
 main-content {
   display: block;
   padding-top: calc(var(--top-bar-height) + env(safe-area-inset-top));
-  padding-bottom: 0.5rem;
+  padding-bottom: 4.5rem;
 }
 
 main-content.is-fixed {
