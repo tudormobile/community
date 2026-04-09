@@ -37,8 +37,11 @@ const locationMarkers = [
 .items-view {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  min-height: 0;
+  position: fixed;
+  top: calc(var(--top-bar-height) + env(safe-area-inset-top));
+  left: 0;
+  right: 0;
+  bottom: 4.5rem;
   overflow: hidden;
   max-width: none;
   margin: 0;
