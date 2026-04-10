@@ -15,6 +15,10 @@ export interface ServiceVersion {
   version: string
 }
 
+export interface DbxVersion {
+  version: string
+}
+
 export interface Announcement {
   id: number
   title: string
