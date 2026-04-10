@@ -68,7 +68,7 @@ onMounted(async () => {
         </div>
         <div class="item">
             <span>Notices:</span>
-            <span v-if="announcementCount !== null" class="status">{{ announcementCount }}</span>
+            <span v-if="announcementCount !== null" class="status">{{ announcementCount.toLocaleString('en-US') }}</span>
             <span v-if="announcementCount === null && !error" class="query">Checking...</span>
             <span v-if="announcementCount === null && error" class="status">Unknown</span>
         </div>
