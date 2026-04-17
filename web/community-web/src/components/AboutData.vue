@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import type { DbxResponse, DbxVersion } from '@/types/api'
+import type { DbxIdStatus, DbxResponse, DbxVersion } from '@/types/api'
 
 const eventsId = 'events'
 const itemsId = 'items'
