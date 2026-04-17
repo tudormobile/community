@@ -27,7 +27,7 @@ const route = useRoute()
 
   <div class="bottom-bar">
     <nav class="tab-nav">
-      <RouterLink to="/" class="tab-item">
+      <RouterLink to="/home" class="tab-item">
         <img :src="homeIcon" class="tab-icon" alt="" />
         <span class="tab-label">Home</span>
       </RouterLink>
