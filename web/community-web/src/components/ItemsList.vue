@@ -13,24 +13,23 @@ defineProps<{
 </script>
 
 <template>
-  <section class="items-list">
-    <h2>Items List</h2>
+  <div class="items-list">
 
     <ul v-if="markers.length" class="marker-list">
       <li v-for="marker in markers" :key="marker.id" class="marker-row">
-        <h3>{{ marker.title || `Marker ${marker.id}` }}</h3>
+        <h3>{{ marker.title || `No name` }}</h3>
         <p v-if="marker.description">{{ marker.description }}</p>
         <p>{{ marker.lat.toFixed(6) }}, {{ marker.lng.toFixed(6) }}</p>
       </li>
     </ul>
 
     <p v-else class="empty-state">No markers available.</p>
-  </section>
+  </div>
 </template>
 
 <style scoped>
 .items-list {
-  display: grid;
+  width: 100%;
   gap: 0.75rem;
 }
 
@@ -42,7 +41,7 @@ h3 {
 .marker-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0.5rem;
   display: grid;
   gap: 0.75rem;
 }

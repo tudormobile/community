@@ -1,9 +1,9 @@
 {
-  "name": "Swap",
-  "tagline": "A community-driven event for sharing and reuse.",
+  "name": "Giveaway",
+  "tagline": "Clifton Park Giveaway Weekend - Give your stuff new life!",
   "logoUrl": "https://cliftonparkny.gov/images/logo/logo_cropped.png",
   "itemName": "Stuff",
-  "description": "Swap is a community event where people can bring items they no longer need and exchange them for items others have brought. It's a great way to promote reuse and reduce waste in our community.",
+  "description": "This is the fourth annual Clifton Park Giveaway weekend (April 17-19, 2026). Use the 'Items' tab to view the giveaway map and items list.",
   "homeLocation": {
     "adr": "Clifton Park, NY",
     "lat": 42.85906441954508,

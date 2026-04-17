@@ -127,7 +127,7 @@ async function onMapReady(map: LeafletMap) {
         :icon="markerIcon"
       >
         <LPopup>
-          <strong>{{ marker.title || `Marker ${marker.id}` }}</strong>
+          <strong>{{ marker.title || `No name` }}</strong>
           <p v-if="marker.description">{{ marker.description }}</p>
           <p>{{ marker.lat.toFixed(6) }}, {{ marker.lng.toFixed(6) }}</p>
         </LPopup>

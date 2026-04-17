@@ -1,40 +1,60 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import type { DbxResponse, DbxVersion } from '@/types/api'
+
+const eventsId = 'events'
+const itemsId = 'items'
+
+const eventsStatusUrl = `${import.meta.env.VITE_API_BASE_URL}/dbx/status/${eventsId}`
+const itemsStatusUrl = `${import.meta.env.VITE_API_BASE_URL}/dbx/status/${itemsId}`
+
 const status = ref<DbxVersion | null>(null)
 const error = ref<string | null>(null)
 
 const itemCount = ref<number | null>(null)
 const eventCount = ref<number | null>(null)
-const announcementCount = ref<number | null>(null)
+
+function getRequestHeaders(): HeadersInit {
+    const additionalHeaders: Record<string, string> = JSON.parse(
+        import.meta.env.VITE_API_ADDITIONAL_HEADERS
+    )
+
+    return {
+        [import.meta.env.VITE_API_KEY_NAME]: import.meta.env.VITE_API_KEY_VALUE,
+        ...additionalHeaders,
+    }
+}
+
+async function fetchDbxData<T>(url: string): Promise<T> {
+    const response = await fetch(url, {
+        headers: getRequestHeaders(),
+    })
+
+    if (!response.ok) {
+        throw new Error(`Request failed: ${response.status} ${response.statusText}`)
+    }
+
+    const result: DbxResponse<T> = await response.json()
+    if (!result.success) {
+        throw new Error(String(result.data ?? 'Unknown API error'))
+    }
+
+    return result.data as T
+}
 
 onMounted(async () => {
     try {
-        const additionalHeaders: Record<string, string> = JSON.parse(
-            import.meta.env.VITE_API_ADDITIONAL_HEADERS
-        )
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/dbx/status`, {
-            headers: {
-                [import.meta.env.VITE_API_KEY_NAME]: import.meta.env.VITE_API_KEY_VALUE,
-                ...additionalHeaders,
-            },
-        })
-        if (!response.ok) {
-            error.value = `Request failed: ${response.status} ${response.statusText}`
-            return
-        }
-        const result: DbxResponse<DbxVersion> = await response.json()
-        if (result.success) {
-            status.value = result.data as DbxVersion
-            // For now, we'll just set these to dummy values since the API doesn't provide them yet
-            itemCount.value = 1234
-            eventCount.value = 567
-            announcementCount.value = 89
-        } else {
-            error.value = result.data as string
-        }
+        const [versionData, itemsData, eventsData] = await Promise.all([
+            fetchDbxData<DbxVersion>(`${import.meta.env.VITE_API_BASE_URL}/dbx/status`),
+            fetchDbxData<DbxIdStatus>(itemsStatusUrl),
+            fetchDbxData<DbxIdStatus>(eventsStatusUrl),
+        ])
+
+        status.value = versionData
+        itemCount.value = itemsData.count
+        eventCount.value = eventsData.count
     } catch (e) {
-        error.value = 'Offline'
+        error.value = e instanceof Error ? e.message : 'Offline'
     }
 })
 
@@ -65,12 +85,6 @@ onMounted(async () => {
             <span v-if="eventCount !== null" class="status">{{ eventCount.toLocaleString('en-US') }}</span>
             <span v-if="eventCount === null && !error" class="query">Checking...</span>
             <span v-if="eventCount === null && error" class="status">Unknown</span>
-        </div>
-        <div class="item">
-            <span>Notices:</span>
-            <span v-if="announcementCount !== null" class="status">{{ announcementCount.toLocaleString('en-US') }}</span>
-            <span v-if="announcementCount === null && !error" class="query">Checking...</span>
-            <span v-if="announcementCount === null && error" class="status">Unknown</span>
         </div>
     </div>
 </template>
