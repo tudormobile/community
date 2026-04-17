@@ -20,8 +20,8 @@ export interface DbxVersion {
 }
 
 export interface DbxIdStatus {
-    id: string
-    count: number
+  id: string
+  count: number
 }
 
 export interface Announcement {
