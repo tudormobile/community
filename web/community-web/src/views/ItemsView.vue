@@ -13,6 +13,7 @@ import type { AppConfig } from '@/types/config'
 import type { LocationData } from '@/types/location'
 import { createNearestLocationLookup } from '@/utils/nearestLocation'
 
+
 interface LocationMarker {
   id: string | number
   title: string

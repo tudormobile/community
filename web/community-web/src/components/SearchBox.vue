@@ -25,7 +25,7 @@ const handleInput = (e: Event) => {
   <div class="search-container">
     <div class="search-pillbox">
       <div class="search-input-wrapper">
-        <img class="search-icon" :src="Search" />
+        <img class="search-icon" :src="Search" aria-hidden="true" alt="Search" />
         <input :value="searchTextValue" @input="handleInput" type="text" placeholder="Filter events"
           class="search-input" />
       </div>
@@ -34,7 +34,7 @@ const handleInput = (e: Event) => {
 
       <button @click="emit('add')" class="add-button">
         <div class="add-icon-wrapper">
-          <img class="add-icon" :src="AddPin" />
+          <img class="add-icon" :src="AddPin" aria-hidden="true" alt="Add" />
         </div>
         <span class="add-label">Add</span>
       </button>

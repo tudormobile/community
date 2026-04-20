@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import type { DbxResponse, Announcement } from '@/types/api'
+import type { DbxResponse } from '@/types/api'
+import type { Announcement } from '@/types/announcement'
 import Notice from '@/components/Notice.vue'
 
 import type { AppConfig } from '@/types/config'
