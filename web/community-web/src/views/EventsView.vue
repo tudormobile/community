@@ -5,9 +5,23 @@ import Calendar from '@/components/Calendar.vue'
 import EventList from '@/components/EventList.vue'
 import calendarIcon from '@/assets/icons/calendar_month.svg'
 import listIcon from '@/assets/icons/list.svg'
+import allEventsData from '@/assets/events.json'
 import type { CalendarEvent } from '@/types/calendarEvent'
+import type { LocationData } from '@/types/location'
 
-const allEvents = ref<CalendarEvent[]>([])
+type CalendarEventAsset = Omit<CalendarEvent, 'start' | 'end'> & {
+  start: string
+  end: string
+  location?: LocationData
+}
+
+const allEvents = ref<CalendarEvent[]>(
+  (allEventsData as CalendarEventAsset[]).map((event) => ({
+    ...event,
+    start: new Date(event.start),
+    end: new Date(event.end),
+  }))
+)
 const viewMode = ref<'first' | 'second'>('first')
 
 </script>
