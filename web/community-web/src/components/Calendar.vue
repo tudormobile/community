@@ -28,7 +28,7 @@ const attributes = computed(() =>
         <div v-for="{ customData: evt } in attrs" :key="evt.id" class="event-popover">
           <strong>{{ evt.title }}</strong>
           <span v-if="evt.description" class="event-desc">{{ evt.description }}</span>
-          <span v-if="evt.location" class="event-loc">{{ evt.location }}</span>
+          <span v-if="evt.location" class="event-loc">{{ evt.location.adr }}</span>
         </div>
       </template>
     </VCalendar>

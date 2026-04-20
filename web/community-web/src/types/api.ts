@@ -24,9 +24,3 @@ export interface DbxIdStatus {
   count: number
 }
 
-export interface Announcement {
-  id: number
-  title: string
-  content: string
-  date: string
-}

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import configData from '@/assets/config.json'
 import allLocations from '@/assets/locations.json'
 import allMarkers from '@/assets/markers.json'
 import ItemsList from '@/components/ItemsList.vue'
 import ItemsMap from '@/components/ItemsMap.vue'
 import ItemsToggle from '@/components/ItemsToggle.vue'
+import SearchBox from '@/components/SearchBox.vue'
 import mapIcon from '@/assets/icons/map.svg'
 import listIcon from '@/assets/icons/list.svg'
 import type { AppConfig } from '@/types/config'
@@ -30,6 +31,7 @@ interface RawLocationMarker {
 
 const appConfig = configData as AppConfig
 const viewMode = ref<'first' | 'second'>('first')
+const searchTextValue = ref('')
 const nearestLocationLookup = createNearestLocationLookup(allLocations as LocationData[])
 
 function toNumber(value: number | string): number {
@@ -59,6 +61,20 @@ const locationMarkers = ref<LocationMarker[]>([
   },
   ...normalizedMarkers,
 ])
+
+const filteredMarkers = computed<LocationMarker[]>(() => {
+  const normalizedQuery = searchTextValue.value.trim().toLowerCase()
+
+  if (!normalizedQuery) {
+    return locationMarkers.value
+  }
+
+  return locationMarkers.value.filter((marker) => {
+    const title = marker.title?.toLowerCase() ?? ''
+    const description = marker.description?.toLowerCase() ?? ''
+    return title.includes(normalizedQuery) || description.includes(normalizedQuery)
+  })
+})
 
 function appendAddressToTitle(marker: LocationMarker, address: string): string {
   const trimmedAddress = address.trim()
@@ -104,16 +120,39 @@ async function enrichMarkerTitlesInBackground() {
 onMounted(() => {
   void enrichMarkerTitlesInBackground()
 })
+
+function handleAddEvent() {
+  // Placeholder for future event creation flow.
+}
 </script>
 
 <template>
   <section class="items-view">
-    <div class="toggle-wrapper">
-      <ItemsToggle v-model="viewMode" first-label="Map" second-label="List" :first-icon="mapIcon" :second-icon="listIcon" />
-    </div>
+    <template v-if="viewMode === 'first'">
+      <ItemsMap class="map-layer" :markers="filteredMarkers" height="100%" />
 
-    <ItemsMap v-if="viewMode === 'first'" :markers="locationMarkers" height="100%" />
-    <ItemsList v-else :markers="locationMarkers" />
+      <div class="overlay-controls">
+        <div class="toggle-wrapper">
+          <ItemsToggle v-model="viewMode" first-label="Map" second-label="List" :first-icon="mapIcon" :second-icon="listIcon" />
+        </div>
+
+        <div class="search-wrapper">
+          <SearchBox v-model:search-text-value="searchTextValue" @add="handleAddEvent" />
+        </div>
+      </div>
+    </template>
+
+    <template v-else>
+      <div class="toggle-wrapper">
+        <ItemsToggle v-model="viewMode" first-label="Map" second-label="List" :first-icon="mapIcon" :second-icon="listIcon" />
+      </div>
+
+      <div class="search-wrapper">
+        <SearchBox v-model:search-text-value="searchTextValue" @add="handleAddEvent" />
+      </div>
+
+      <ItemsList :markers="filteredMarkers" />
+    </template>
   </section>
 </template>
 
@@ -133,12 +172,39 @@ onMounted(() => {
   gap: 0;
 }
 
+.map-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.overlay-controls {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.overlay-controls > * {
+  pointer-events: auto;
+}
+
 p {
   margin: 0;
 }
 
 .toggle-wrapper {
   padding: 0.4rem 0;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.search-wrapper {
+  padding: 0 0.75rem 0.5rem;
+  display: flex;
+  justify-content: center;
   flex-shrink: 0;
 }
 

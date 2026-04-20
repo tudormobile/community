@@ -31,7 +31,7 @@ function formatDate(date: Date) {
         <div class="event-title">{{ event.title }}</div>
         <div class="event-meta">
           <span>{{ formatDate(event.start) }}</span>
-          <span v-if="event.location" class="event-location">· {{ event.location }}</span>
+          <span v-if="event.location" class="event-location">· {{ event.location.adr }}</span>
         </div>
         <p v-if="event.description" class="event-description">{{ event.description }}</p>
       </li>

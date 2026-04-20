@@ -1,0 +1,38 @@
+[
+  {
+    "id": "spring-cleanup-2026",
+    "title": "Spring Neighborhood Cleanup",
+    "description": "Meet at the corner lot for supplies, then spread out by block.",
+    "start": "2026-04-25T09:00:00-04:00",
+    "end": "2026-04-25T11:30:00-04:00",
+    "location": {
+      "adr": "43 Riverview Rd",
+      "lat": 42.79641063808723,
+      "lng": -73.77404610528767
+    }
+  },
+  {
+    "id": "board-game-night-2026",
+    "title": "Board Game Night",
+    "description": "Bring a snack and your favorite game.",
+    "start": "2026-05-02T18:30:00-04:00",
+    "end": "2026-05-02T21:00:00-04:00",
+    "location": {
+      "adr": "87 Riverview Rd",
+      "lat": 42.79640108094034,
+      "lng": -73.7775741199884
+    }
+  },
+  {
+    "id": "food-drive-2026",
+    "title": "Community Food Drive",
+    "description": "Drop off non-perishable items for the regional pantry.",
+    "start": "2026-05-16T10:00:00-04:00",
+    "end": "2026-05-16T13:00:00-04:00",
+    "location": {
+      "adr": "35 Riverview Rd",
+      "lat": 42.798065175554285,
+      "lng": -73.77550225819353
+    }
+  }
+]
