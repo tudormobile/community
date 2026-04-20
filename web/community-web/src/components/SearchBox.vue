@@ -32,7 +32,7 @@ const handleInput = (e: Event) => {
 
       <div class="divider"></div>
 
-      <button @click="emit('add')" class="add-button">
+      <button type="button" @click="emit('add')" class="add-button">
         <div class="add-icon-wrapper">
           <img class="add-icon" :src="AddPin" aria-hidden="true" alt="Add" />
         </div>
