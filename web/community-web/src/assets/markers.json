@@ -1,1 +1,56 @@
-[]
+[
+    {
+        "title": "Athens Airport",
+        "description": "Athens International Airport Eleftherios Venizelos is the largest and busiest airport in Greece, serving as a major hub for international and domestic flights.",
+        "lat": 37.9356,
+        "lng": 23.9484
+    },
+    {
+        "title": "Athens",
+        "description": "Athens is the capital of Greece and one of the world's oldest cities, with its recorded history spanning over 3,400 years. It is widely referred to as the cradle of Western civilization and the birthplace of democracy.",
+        "lat": 37.983810,
+        "lng": 23.728039
+    },
+    {
+        "title": "Corinth",
+        "description": "Corinth is a city in Greece, located on the Isthmus of Corinth, which connects the Peloponnese peninsula with the mainland of Greece. It has a rich history dating back to ancient times and was an important center of trade and culture.",
+        "lat": 37.9402,
+        "lng": 22.9320
+    },
+    {
+        "title": "Mykonos",
+        "description": "Mykonos is a Greek island in the Cyclades group, known for its vibrant nightlife, beautiful beaches, and charming white-washed buildings. It is a popular tourist destination, attracting visitors from around the world.",
+        "lat": 37.4467,
+        "lng": 25.3289
+    },
+    {
+        "title": "Patmos",
+        "description": "Patmos is a small Greek island in the Aegean Sea, known for its religious significance as the place where John the Apostle received the visions recorded in the Book of Revelation. The island is home to the Monastery of St. John and the Cave of the Apocalypse.",
+        "lat": 37.3239,
+        "lng": 26.5458
+    },
+    {
+        "title": "Santorini",
+        "description": "Santorini is a volcanic island in the Cyclades group of the Greek islands, famous for its stunning sunsets, white-washed buildings, and blue-domed churches. It is a popular tourist destination known for its unique landscape and rich history.",
+        "lat": 36.3932,
+        "lng": 25.4615
+    },
+    {
+        "title": "Delphi",
+        "description": "Delphi is an ancient sanctuary in Greece that was once considered the center of the world. It was home to the famous Oracle of Delphi and the Temple of Apollo, attracting pilgrims from all over the ancient world.",
+        "lat": 38.4828,
+        "lng": 22.5000
+    },
+    {
+        "title": "Meteora",
+        "description": "Meteora is a rock formation in central Greece that hosts one of the largest and most precipitously built complexes of Eastern Orthodox monasteries. The monasteries are built on natural sandstone rock pillars, offering breathtaking views.",
+        "lat": 39.7200,
+        "lng": 21.6300
+    },
+    {
+        "title": "Thessaloniki",
+        "description": "Thessaloniki is the second-largest city in Greece and an important cultural and economic hub. It has a rich history, with influences from various civilizations, including Roman, Byzantine, and Ottoman.",
+        "lat": 40.6401,
+        "lng": 22.9444
+    }
+]

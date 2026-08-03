@@ -1,38 +1,122 @@
 [
   {
-    "id": "spring-cleanup-2026",
-    "title": "Spring Neighborhood Cleanup",
-    "description": "Meet at the corner lot for supplies, then spread out by block.",
-    "start": "2026-04-25T09:00:00-04:00",
-    "end": "2026-04-25T11:30:00-04:00",
+    "id": "arrive-athens-2026",
+    "title": "Arrive in Athens (D)",
+    "description": "Arrive in Athens and check into your hotel.",
+    "start": "2026-09-23T09:00:00+03:00",
+    "end": "2026-09-23T11:30:00+03:00",
     "location": {
-      "adr": "43 Riverview Rd",
-      "lat": 42.79641063808723,
-      "lng": -73.77404610528767
+      "adr": "Athens Airport, Greece",
+      "lat": 37.9356,
+      "lng": 23.9484
     }
   },
   {
-    "id": "board-game-night-2026",
-    "title": "Board Game Night",
-    "description": "Bring a snack and your favorite game.",
-    "start": "2026-05-02T18:30:00-04:00",
-    "end": "2026-05-02T21:00:00-04:00",
+    "id": "bus-tour-corinth-2026",
+    "title": "Bus Tour to Corinth (B,D)",
+    "description": "Take a bus tour to the ancient city of Corinth. Embark on a tour of the city where you will see the Royal Palace, the Stadium and Temple of Zeus, the Theatre of Dionysius and the Agora (marketplace) where Paul spoke and Socrates' prison. Visit Mars Hill and the Acropolis with the famous Parthenon.",
+    "start": "2026-09-24T08:00:00+03:00",
+    "end": "2026-09-24T17:00:00+03:00",
     "location": {
-      "adr": "87 Riverview Rd",
-      "lat": 42.79640108094034,
-      "lng": -73.7775741199884
+      "adr": "Corinth, Greece",
+      "lat": 37.9402,
+      "lng": 22.9320
     }
   },
   {
-    "id": "food-drive-2026",
-    "title": "Community Food Drive",
-    "description": "Drop off non-perishable items for the regional pantry.",
-    "start": "2026-05-16T10:00:00-04:00",
-    "end": "2026-05-16T13:00:00-04:00",
+    "id": "cruise-to-mykonos-2026",
+    "title": "Cruise to Mykonos (B,L,D)",
+    "description": "Embark on a cruise to the beautiful island of Mykonos. Walk around the glistening town. The houses, streets, even the sails of the windmills are all awash with white. Relax at a sidewalk cafe or taverna. Sail on to Kusadasi.",
+    "start": "2026-09-25T08:00:00+03:00",
+    "end": "2026-09-25T18:00:00+03:00",
     "location": {
-      "adr": "35 Riverview Rd",
-      "lat": 42.798065175554285,
-      "lng": -73.77550225819353
+      "adr": "Mykonos, Greece",
+      "lat": 37.4467,
+      "lng": 25.3289
+    }
+  },
+  {
+    "id": "cruise-to-patmos-2026",
+    "title": "Cruise to Patmos (B,L,D)",
+    "description": "Sail to the island of Patmos, where John wrote the Book of Revelation. Visit the Monastery of St. John and the Cave of the Apocalypse. Sail on to Heraklion, Crete",
+    "start": "2026-09-26T08:00:00+03:00",
+    "end": "2026-09-26T18:00:00+03:00",
+    "location": {
+      "adr": "Patmos, Greece",
+      "lat": 37.3239,
+      "lng": 26.5458
+    }
+  },
+  {
+    "id": "cruise-to-santorini-2026",
+    "title": "Cruise to Santorini (B,L,D)",
+    "description": "Sail to the island of Santorini, known for its stunning sunsets and white-washed buildings. Explore the charming villages and enjoy the local cuisine.",
+    "start": "2026-09-27T08:00:00+03:00",
+    "end": "2026-09-27T18:00:00+03:00",
+    "location": {
+      "adr": "Santorini, Greece",
+      "lat": 36.3932,
+      "lng": 25.4615
+    }
+  },
+  {
+    "id": "cruise-to-delphi-2026",
+    "title": "Cruise/Bus to Delphi (B,D)",
+    "description": "Morning arrival in Lavrion. Drive on the national highway through Thebes, Levadia and the picturesque village of Ara-chova to Delphi. Visit the Museum to see the famous Bronze Charioteer along with other statues. In the afternoon visit the Temple of Apollo, the Theatre, the Athenian Treasury, and the Castalian Spring. Drive via Larissa, Lamia and Trikala to Kalambaka. Overnight in the Kalambaka area.",
+    "start": "2026-09-28T08:00:00+03:00",
+    "end": "2026-09-28T18:00:00+03:00",
+    "location": {
+      "adr": "Delphi, Greece",
+      "lat": 38.4828,
+      "lng": 22.5000
+    }
+  },
+  {
+    "id": "bus-to-thessaloniki-2026",
+    "title": "Bus to Thessaloniki (B,D)",
+    "description": "Visit Meteora to see the \"Hanging Monasteries\" perched on top of unusual rock formations. Continue via Edessa to Thessaloniki where you will see the Rotonda, Triumphal Arch of Galerius, and the seafront promenade with the White Tower. Overnight in Thessaloniki.",
+    "start": "2026-09-29T08:00:00+03:00",
+    "end": "2026-09-29T18:00:00+03:00",
+    "location": {
+      "adr": "Meteora, Greece",
+      "lat": 39.7200,
+      "lng": 21.6300
+    }
+  },
+  {
+    "id": "thessaloniki-2026",
+    "title": "Thessaloniki (B,D)",
+    "description": "Visit the Archaeological Museum, the Byzantine Museum, and the Church of St. Demetrios. Enjoy a farewell dinner in the city.",
+    "start": "2026-09-30T08:00:00+03:00",
+    "end": "2026-09-30T18:00:00+03:00",
+    "location": {
+      "adr": "Thessaloniki, Greece",
+      "lat": 40.6401,
+      "lng": 22.9444
+    }
+  },
+  {
+    "id": "bus-to-athens-2026",
+    "title": "Bus to Athens (B,D)",
+    "description": "Drive to Athens via the Valley of Tempi and Thermopylae.",
+    "start": "2026-10-01T08:00:00+03:00",
+    "end": "2026-10-01T18:00:00+03:00",
+    "location": {
+      "adr": "Athens, Greece",
+      "lat": 37.9838,
+      "lng": 23.7275
+    }
+  },
+  {
+    "id": "depart-athens-2026",
+    "title": "Depart Athens (B)",
+    "description": "Check out of your hotel and transfer to the airport for your flight home.",
+    "start": "2026-10-02T08:00:00+03:00",
+    "end": "2026-10-02T11:30:00+03:00",
+    "location": {
+      "adr": "Athens Airport, Greece",
+      "lat": 37.9356,
+      "lng": 23.9484
     }
   }
 ]

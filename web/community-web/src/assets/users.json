@@ -1,0 +1,322 @@
+{
+    "travelGroups": [
+        {
+            "id": 1,
+            "name": "Travel Group 1",
+            "parties": [
+                {
+                    "id": 1,
+                    "name": "Party Baker",
+                    "members": [
+                        {
+                            "name": "LISAMARY BAKER",
+                            "present": false
+                        },
+                        {
+                            "name": "RAYMONDEARL BAKERJR",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "name": "Party Butler",
+                    "members": [
+                        {
+                            "name": "PATRICKJOSEPH BUTLER",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "name": "Party Callaghan",
+                    "members": [
+                        {
+                            "name": "ELIZABETHMARY CALLAGHAN",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "name": "Party Casey",
+                    "members": [
+                        {
+                            "name": "PAULDAVID CASEY",
+                            "present": false
+                        },
+                        {
+                            "name": "ABIGAILOSTRANDER CASEY",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "name": "Party Clarke",
+                    "members": [
+                        {
+                            "name": "NEILFRANCIS CLARKE",
+                            "present": false
+                        },
+                        {
+                            "name": "BARBARAJEAN CLARKE",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "name": "Party Dean",
+                    "members": [
+                        {
+                            "name": "MICHAELTHOMAS DEAN",
+                            "present": false
+                        },
+                        {
+                            "name": "JANISLYNN DEAN",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "name": "Party Delude",
+                    "members": [
+                        {
+                            "name": "MARIEA DELUDE",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "Party Gordon",
+                    "members": [
+                        {
+                            "name": "FREDRICKA GORDON",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "name": "Party Kaiser",
+                    "members": [
+                        {
+                            "name": "FRANCINELINDA KAISER",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "name": "Party Kania",
+                    "members": [
+                        {
+                            "name": "CHARLESJOHN KANIA",
+                            "present": false
+                        },
+                        {
+                            "name": "DOROTHYHENRIETTA KANIA",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "name": "Party Kasky",
+                    "members": [
+                        {
+                            "name": "APRILJENNIFERIRWIN KASKY",
+                            "present": false
+                        },
+                        {
+                            "name": "EMILYANN KASKY",
+                            "present": false
+                        },
+                        {
+                            "name": "MARGARETMARY KASKY",
+                            "present": false
+                        },
+                        {
+                            "name": "ROBERTJOHN KASKYIII",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "name": "Party Kelts",
+                    "members": [
+                        {
+                            "name": "MARYANNTHERESE KELTS",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 13,
+                    "name": "Party Kerin",
+                    "members": [
+                        {
+                            "name": "CHRISTADENISE KERIN",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 14,
+                    "name": "Party Ketcham",
+                    "members": [
+                        {
+                            "name": "KARENMARIE KETCHAM",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 15,
+                    "name": "Party Kile",
+                    "members": [
+                        {
+                            "name": "SUSANMARY KILE",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 16,
+                    "name": "Party Mills",
+                    "members": [
+                        {
+                            "name": "ELAINEMARY MILLS",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 17,
+                    "name": "Party Minnear",
+                    "members": [
+                        {
+                            "name": "WILLIAMPAUL MINNEAR",
+                            "present": false
+                        },
+                        {
+                            "name": "CHRISTINEMAURA MINNEAR",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 18,
+                    "name": "Party Newton",
+                    "members": [
+                        {
+                            "name": "MARILYN NEWTON",
+                            "present": false
+                        },
+                        {
+                            "name": "HEATHERMARIE NEWTON",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 19,
+                    "name": "Party Obrien",
+                    "members": [
+                        {
+                            "name": "MAURAE OBRIEN",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 20,
+                    "name": "Party Schabinger",
+                    "members": [
+                        {
+                            "name": "JOANNEM SCHABINGER",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 21,
+                    "name": "Party Tudor",
+                    "members": [
+                        {
+                            "name": "WILLIAMHAROLD TUDOR",
+                            "present": false
+                        },
+                        {
+                            "name": "NANCYMARIE TUDOR",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 22,
+                    "name": "Party Vandawalker",
+                    "members": [
+                        {
+                            "name": "PAMELAANN VANDAWALKER",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 23,
+                    "name": "Party Wilson",
+                    "members": [
+                        {
+                            "name": "SUSANJANE WILSON",
+                            "present": false
+                        },
+                        {
+                            "name": "WILLIAMJOHN WILSONJR",
+                            "present": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Travel Group 2",
+            "parties": [
+                {
+                    "id": 3,
+                    "name": "Party 3",
+                    "members": [
+                        {
+                            "name": "Member 5",
+                            "present": false
+                        },
+                        {
+                            "name": "Member 6",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "name": "Party 4",
+                    "members": [
+                        {
+                            "name": "Member 7",
+                            "present": false
+                        },
+                        {
+                            "name": "Member 8",
+                            "present": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

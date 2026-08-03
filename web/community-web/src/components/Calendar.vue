@@ -21,7 +21,7 @@ const attributes = computed(() =>
   <div class="calendar-wrapper">
     <VCalendar
       class="full-calendar"
-      color="green"
+      color="blue"
       :attributes="attributes"
     >
       <template #day-popover="{ attributes: attrs }">
