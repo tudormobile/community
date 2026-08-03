@@ -72,6 +72,8 @@ jobs:
           zip -r "$GITHUB_WORKSPACE/community-web-dist.zip" .
 
       - name: Create release
+# disable for now
+        if: false
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
