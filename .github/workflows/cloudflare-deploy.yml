@@ -79,9 +79,18 @@ jobs:
         run: |
           gh release create -t "v${{ steps.version_step.outputs.semVer }}-cloudflare" --generate-notes "v${{ steps.version_step.outputs.semVer }}-cloudflare" "$GITHUB_WORKSPACE/community-web-dist.zip#package"
 
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy to Cloudflare Worker (override name)
+        if: ${{ secrets.CLOUDFLARE_WORKER_NAME != '' }}
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name "${{ secrets.CLOUDFLARE_PAGES_PROJECT }}" --branch cloudflare-deploy
+          command: deploy --config wrangler.toml --name "${{ secrets.CLOUDFLARE_WORKER_NAME }}"
+
+      - name: Deploy to Cloudflare Worker (default name from config)
+        if: ${{ secrets.CLOUDFLARE_WORKER_NAME == '' }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config wrangler.toml
