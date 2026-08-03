@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref } from 'vue'
 import { saveThumbnail, type ThumbnailShape } from '../lib/thumbnailStore'
 
 const emit = defineEmits<{
@@ -38,30 +38,46 @@ const startCamera = async () => {
   errorMessage.value = ''
 
   try {
-    const preferredConstraints: MediaStreamConstraints = {
-      audio: false,
-      video: {
+    const preferredVideoConstraints: MediaTrackConstraints[] = [
+      {
         facingMode: { ideal: 'environment' },
         width: { ideal: 1920 },
         height: { ideal: 1080 },
       },
+      {
+        facingMode: { ideal: 'user' },
+        width: { ideal: 1920 },
+        height: { ideal: 1080 },
+      },
+      {
+        width: { ideal: 1920 },
+        height: { ideal: 1080 },
+      },
+    ]
+
+    let media: MediaStream | null = null
+    for (const video of preferredVideoConstraints) {
+      try {
+        media = await navigator.mediaDevices.getUserMedia({ audio: false, video })
+        break
+      } catch {
+        // Try the next camera preference.
+      }
     }
 
-    let media: MediaStream
-    try {
-      media = await navigator.mediaDevices.getUserMedia(preferredConstraints)
-    } catch {
+    if (!media) {
       media = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     }
 
     stream.value = media
+    isStreaming.value = true
+
+    await nextTick()
 
     if (videoElement.value) {
       videoElement.value.srcObject = media
       await videoElement.value.play()
     }
-
-    isStreaming.value = true
   } catch (error) {
     errorMessage.value =
       error instanceof Error
