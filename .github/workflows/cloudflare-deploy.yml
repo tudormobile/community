@@ -16,6 +16,11 @@ jobs:
         working-directory: web/community-web
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
       - name: Ensure cloudflare-deploy branch
         run: |
           if [ "${GITHUB_REF}" != "refs/heads/cloudflare-deploy" ]; then
@@ -23,11 +28,6 @@ jobs:
             echo "Current ref: ${GITHUB_REF}"
             exit 1
           fi
-
-      - name: Checkout code
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Disable local .npmrc for CI
         run: |
