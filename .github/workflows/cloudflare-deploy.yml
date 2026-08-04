@@ -2,6 +2,11 @@ name: Community App Cloudflare Deploy
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ cloudflare-deploy ]
+    paths:
+      - 'web/**'
+      - '.github/workflows/cloudflare-deploy.yml'
 
 permissions:
   contents: write
@@ -17,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -43,9 +48,9 @@ jobs:
         uses: gittools/actions/gitversion/execute@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
-          node-version: '22.x'
+          node-version: '24.x'
           cache: 'npm'
           cache-dependency-path: web/community-web/package-lock.json
           registry-url: 'https://npm.pkg.github.com'
@@ -71,16 +76,25 @@ jobs:
           cd dist
           zip -r "$GITHUB_WORKSPACE/community-web-dist.zip" .
 
-      - name: Create release
-# disable for now
-        if: false
+      - name: Create or update release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create -t "v${{ steps.version_step.outputs.semVer }}-cloudflare" --generate-notes "v${{ steps.version_step.outputs.semVer }}-cloudflare" "$GITHUB_WORKSPACE/community-web-dist.zip#package"
+          TAG="v${{ steps.version_step.outputs.semVer }}"
+          TITLE="$TAG"
+          ASSET="$GITHUB_WORKSPACE/community-web-dist.zip#package"
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists. Updating asset."
+            gh release upload "$TAG" "$ASSET" --clobber
+            gh release edit "$TAG" --title "$TITLE"
+          else
+            echo "Creating release $TAG."
+            gh release create "$TAG" "$ASSET" --title "$TITLE" --generate-notes
+          fi
 
       - name: Deploy to Cloudflare Worker
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
