@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import type { DbxResponse } from '@/types/api'
+import { ref } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import type { Announcement } from '@/types/announcement'
+import type { DbxResponse } from '@/types/api'
 import Notice from '@/components/Notice.vue'
+import announcementsData from '@/assets/announcements.json'
 
 import type { AppConfig } from '@/types/config'
 import appConfig from '@/assets/config.json'
 
+const useLocalAnnouncements = true
 const announcementsId = '2b394650b277e000326337a5a2905f62bdae4c96cfbc319c5738a2b6a4c1c228'
 const config = appConfig as AppConfig
 
-const announcements = ref<Announcement[] | null>(null)
+const announcements = ref<Announcement[]>(announcementsData as Announcement[])
 const error = ref<string | null>(null)
-
 let pollTimer: ReturnType<typeof setInterval>
 
 async function fetchAnnouncements() {
@@ -46,12 +48,18 @@ function onVisibilityChange() {
 }
 
 onMounted(() => {
+  if (useLocalAnnouncements) {
+    announcements.value = announcementsData as Announcement[]
+    return
+  }
+
   fetchAnnouncements()
   pollTimer = setInterval(fetchAnnouncements, 30 * 60 * 1000)
   document.addEventListener('visibilitychange', onVisibilityChange)
 })
 
 onUnmounted(() => {
+  if (useLocalAnnouncements) return
   clearInterval(pollTimer)
   document.removeEventListener('visibilitychange', onVisibilityChange)
 })

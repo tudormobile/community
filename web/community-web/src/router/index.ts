@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/items',
+      redirect: '/people',  // We always want to start on the people page, so redirect to that route
     },
     {
       path: '/home',
