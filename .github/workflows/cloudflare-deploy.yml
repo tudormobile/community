@@ -16,6 +16,11 @@ jobs:
         working-directory: web/community-web
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
       - name: Ensure cloudflare-deploy branch
         run: |
           if [ "${GITHUB_REF}" != "refs/heads/cloudflare-deploy" ]; then
@@ -23,11 +28,6 @@ jobs:
             echo "Current ref: ${GITHUB_REF}"
             exit 1
           fi
-
-      - name: Checkout code
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Disable local .npmrc for CI
         run: |
@@ -72,14 +72,17 @@ jobs:
           zip -r "$GITHUB_WORKSPACE/community-web-dist.zip" .
 
       - name: Create release
+# disable for now
+        if: false
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create -t "v${{ steps.version_step.outputs.semVer }}-cloudflare" --generate-notes "v${{ steps.version_step.outputs.semVer }}-cloudflare" "$GITHUB_WORKSPACE/community-web-dist.zip#package"
 
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy to Cloudflare Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name ${{ vars.CLOUDFLARE_PAGES_PROJECT }} --branch cloudflare-deploy
+          command: deploy --config web/community-web/wrangler.toml --name "${{ secrets.CLOUDFLARE_WORKER_NAME }}"
+
