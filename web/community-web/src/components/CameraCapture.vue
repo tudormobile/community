@@ -3,6 +3,7 @@ import { computed, nextTick, onBeforeUnmount, ref } from 'vue'
 import { removeThumbnail, saveThumbnail, type ThumbnailShape } from '@/lib/thumbnailStore'
 
 const props = defineProps<{
+  groupId: string
   partyId: string
   hasThumbnail: boolean
 }>()
@@ -171,7 +172,7 @@ const captureAndSave = async () => {
 
   try {
     const blob = await captureBlob()
-    await saveThumbnail(props.partyId, blob, shape.value)
+    await saveThumbnail(props.groupId, props.partyId, blob, shape.value)
     stopStream()
     emit('saved')
     emit('close')
@@ -187,7 +188,7 @@ const removeCurrentThumbnail = async () => {
   errorMessage.value = ''
 
   try {
-    await removeThumbnail(props.partyId)
+    await removeThumbnail(props.groupId, props.partyId)
     stopStream()
     emit('removed')
     emit('close')

@@ -16,6 +16,8 @@ const gridItems = computed(() => {
   previousUrls = props.items.map((item) => URL.createObjectURL(item.blob))
 
   return props.items.map((item, index) => ({
+    thumbnailId: item.thumbnailId,
+    groupId: item.groupId,
     partyId: item.partyId,
     shape: item.shape,
     createdAt: item.createdAt,
@@ -36,8 +38,13 @@ const toDisplayTime = (createdAt: number): string => new Date(createdAt).toLocal
   <p v-if="items.length === 0">No thumbnails captured yet.</p>
   <div v-else class="grid-scroll">
     <ul class="grid" role="list">
-      <li v-for="item in gridItems" :key="item.partyId" class="cell">
-        <img :src="item.src" :alt="`Thumbnail for party ${item.partyId}`" :class="item.shape" loading="lazy" />
+      <li v-for="item in gridItems" :key="item.thumbnailId" class="cell">
+        <img
+          :src="item.src"
+          :alt="`Thumbnail for group ${item.groupId}, party ${item.partyId}`"
+          :class="item.shape"
+          loading="lazy"
+        />
         <small>{{ toDisplayTime(item.createdAt) }}</small>
       </li>
     </ul>

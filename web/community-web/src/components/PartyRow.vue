@@ -5,6 +5,7 @@ import cameraIconSrc from '../assets/icons/camera.svg'
 import type { EntityId } from '@/types/users'
 
 const props = defineProps<{
+  groupId: EntityId
   partyId: EntityId
   name: string
   presentCount: number
@@ -107,6 +108,7 @@ function onThumbnailRemoved() {
 
       <CameraCapture
         v-if="isCaptureOpen"
+        :group-id="String(groupId)"
         :party-id="String(partyId)"
         :has-thumbnail="Boolean(thumbnailSrc)"
         @saved="onThumbnailSaved"

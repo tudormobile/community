@@ -7,7 +7,7 @@ import userCheckIcon from '@/assets/icons/user_check.svg'
 import MemberRow from '@/components/MemberRow.vue'
 import PartyRow from '@/components/PartyRow.vue'
 import TravelGroupHeader from '@/components/TravelGroupHeader.vue'
-import { listThumbnails, type ThumbnailRecord } from '@/lib/thumbnailStore'
+import { createThumbnailId, listThumbnails, type ThumbnailRecord } from '@/lib/thumbnailStore'
 import type { AppConfig } from '@/types/config'
 import type { EntityId, Member, Party, TravelGroup, UsersAsset } from '@/types/users'
 
@@ -75,7 +75,7 @@ function loadPersistedTravelGroups(): TravelGroup[] | null {
 }
 
 const travelGroups = ref<TravelGroup[]>(loadPersistedTravelGroups() ?? cloneTravelGroups(sourceGroups))
-const thumbnailSrcByPartyId = ref<Record<string, string>>({})
+const thumbnailSrcByThumbnailId = ref<Record<string, string>>({})
 let previousThumbnailObjectUrls: string[] = []
 
 function isValidGroupId(value: unknown): value is EntityId {
@@ -199,7 +199,7 @@ function toThumbnailMap(rows: ThumbnailRecord[]): Record<string, string> {
   for (const row of rows) {
     const objectUrl = URL.createObjectURL(row.blob)
     previousThumbnailObjectUrls.push(objectUrl)
-    nextMap[row.partyId] = objectUrl
+    nextMap[row.thumbnailId] = objectUrl
   }
 
   return nextMap
@@ -208,14 +208,16 @@ function toThumbnailMap(rows: ThumbnailRecord[]): Record<string, string> {
 async function refreshPartyThumbnails() {
   try {
     const rows = await listThumbnails()
-    thumbnailSrcByPartyId.value = toThumbnailMap(rows)
+    thumbnailSrcByThumbnailId.value = toThumbnailMap(rows)
   } catch {
-    thumbnailSrcByPartyId.value = {}
+    thumbnailSrcByThumbnailId.value = {}
   }
 }
 
-function thumbnailSrcForParty(partyId: EntityId): string | null {
-  return thumbnailSrcByPartyId.value[String(partyId)] ?? null
+function thumbnailSrcForParty(groupId: EntityId, partyId: EntityId): string | null {
+  const thumbnailId = createThumbnailId(String(groupId), String(partyId))
+
+  return thumbnailSrcByThumbnailId.value[thumbnailId] ?? null
 }
 
 function markPartyPresent(groupId: EntityId, partyId: EntityId) {
@@ -365,6 +367,7 @@ onBeforeUnmount(() => {
         <PartyRow
           v-for="party in group.parties"
           :key="`${String(group.id)}-${String(party.id)}`"
+          :group-id="group.id ?? ''"
           :party-id="party.id ?? ''"
           :name="party.name"
           :present-count="presentCount(party)"
@@ -373,7 +376,7 @@ onBeforeUnmount(() => {
           :expanded="Boolean(party.expanded)"
           :expand-icon-src="familyIcon"
           :accent-color="config.theme.accent"
-          :thumbnail-src="thumbnailSrcForParty(party.id ?? '')"
+          :thumbnail-src="thumbnailSrcForParty(group.id ?? '', party.id ?? '')"
           @tap-party="markPartyPresent(group.id ?? '', party.id ?? '')"
           @toggle-expanded="togglePartyExpanded(group.id ?? '', party.id ?? '')"
           @thumbnail-saved="refreshPartyThumbnails"

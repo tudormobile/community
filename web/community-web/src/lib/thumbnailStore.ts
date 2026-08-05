@@ -1,6 +1,8 @@
 export type ThumbnailShape = 'square' | 'circle'
 
 export type ThumbnailRecord = {
+  thumbnailId: string
+  groupId: string
   partyId: string
   createdAt: number
   blob: Blob
@@ -9,7 +11,7 @@ export type ThumbnailRecord = {
 }
 
 const DB_NAME = 'community-web-thumbnails'
-const DB_VERSION = 1
+const DB_VERSION = 2
 const STORE_NAME = 'thumbnails'
 
 const openDatabase = (): Promise<IDBDatabase> =>
@@ -19,28 +21,41 @@ const openDatabase = (): Promise<IDBDatabase> =>
     request.onupgradeneeded = () => {
       const db = request.result
 
-      if (!db.objectStoreNames.contains(STORE_NAME)) {
-        const store = db.createObjectStore(STORE_NAME, { keyPath: 'partyId' })
-        store.createIndex('createdAt', 'createdAt', { unique: false })
+      if (db.objectStoreNames.contains(STORE_NAME)) {
+        db.deleteObjectStore(STORE_NAME)
       }
+
+      const store = db.createObjectStore(STORE_NAME, { keyPath: 'thumbnailId' })
+      store.createIndex('createdAt', 'createdAt', { unique: false })
     }
 
     request.onsuccess = () => resolve(request.result)
     request.onerror = () => reject(request.error ?? new Error('Unable to open IndexedDB.'))
   })
 
-const normalizePartyId = (partyId: string): string => partyId.trim()
+const normalizeId = (id: string): string => id.trim()
+
+export const createThumbnailId = (groupId: string, partyId: string): string => {
+  const normalizedGroupId = normalizeId(groupId)
+  const normalizedPartyId = normalizeId(partyId)
+
+  return `${encodeURIComponent(normalizedGroupId)}:${encodeURIComponent(normalizedPartyId)}`
+}
 
 export const saveThumbnail = async (
+  groupId: string,
   partyId: string,
   blob: Blob,
   shape: ThumbnailShape,
-): Promise<{ partyId: string; createdAt: number }> => {
-  const normalizedPartyId = normalizePartyId(partyId)
+): Promise<{ thumbnailId: string; createdAt: number }> => {
+  const normalizedGroupId = normalizeId(groupId)
+  const normalizedPartyId = normalizeId(partyId)
 
-  if (!normalizedPartyId) {
+  if (!normalizedGroupId || !normalizedPartyId) {
     throw new Error('A valid party ID is required to save a thumbnail.')
   }
+
+  const thumbnailId = createThumbnailId(normalizedGroupId, normalizedPartyId)
 
   const db = await openDatabase()
   const createdAt = Date.now()
@@ -50,6 +65,8 @@ export const saveThumbnail = async (
     const store = tx.objectStore(STORE_NAME)
 
     store.put({
+      thumbnailId,
+      groupId: normalizedGroupId,
       partyId: normalizedPartyId,
       createdAt,
       blob,
@@ -59,7 +76,7 @@ export const saveThumbnail = async (
 
     tx.oncomplete = () => {
       db.close()
-      resolve({ partyId: normalizedPartyId, createdAt })
+      resolve({ thumbnailId, createdAt })
     }
     tx.onerror = () => {
       db.close()
@@ -95,12 +112,15 @@ export const listThumbnails = async (): Promise<ThumbnailRecord[]> => {
   })
 }
 
-export const removeThumbnail = async (partyId: string): Promise<void> => {
-  const normalizedPartyId = normalizePartyId(partyId)
+export const removeThumbnail = async (groupId: string, partyId: string): Promise<void> => {
+  const normalizedGroupId = normalizeId(groupId)
+  const normalizedPartyId = normalizeId(partyId)
 
-  if (!normalizedPartyId) {
+  if (!normalizedGroupId || !normalizedPartyId) {
     throw new Error('A valid party ID is required to remove a thumbnail.')
   }
+
+  const thumbnailId = createThumbnailId(normalizedGroupId, normalizedPartyId)
 
   const db = await openDatabase()
 
@@ -108,7 +128,7 @@ export const removeThumbnail = async (partyId: string): Promise<void> => {
     const tx = db.transaction(STORE_NAME, 'readwrite')
     const store = tx.objectStore(STORE_NAME)
 
-    store.delete(normalizedPartyId)
+    store.delete(thumbnailId)
 
     tx.oncomplete = () => {
       db.close()
