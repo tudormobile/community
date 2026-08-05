@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import CameraCapture from '@/components/CameraCapture.vue'
+import cameraIconSrc from '../assets/icons/camera.svg'
+import type { EntityId } from '@/types/users'
 
 const props = defineProps<{
+  groupId: EntityId
+  partyId: EntityId
   name: string
   presentCount: number
   totalCount: number
@@ -9,14 +14,18 @@ const props = defineProps<{
   expanded: boolean
   expandIconSrc: string
   accentColor: string
+  thumbnailSrc?: string | null
 }>()
 
 const emit = defineEmits<{
   (e: 'tap-party'): void
   (e: 'toggle-expanded'): void
+  (e: 'thumbnail-saved'): void
+  (e: 'thumbnail-removed'): void
 }>()
 
 const spinTurns = ref(0)
+const isCaptureOpen = ref(false)
 
 const iconStyle = computed(() => ({
   transform: `rotate(${spinTurns.value * 360}deg)`,
@@ -41,6 +50,22 @@ function onToggleExpanded() {
   spinTurns.value += 1
   emit('toggle-expanded')
 }
+
+function onTapCaptureThumbnail() {
+  isCaptureOpen.value = true
+}
+
+function onCloseCapture() {
+  isCaptureOpen.value = false
+}
+
+function onThumbnailSaved() {
+  emit('thumbnail-saved')
+}
+
+function onThumbnailRemoved() {
+  emit('thumbnail-removed')
+}
 </script>
 
 <template>
@@ -64,6 +89,33 @@ function onToggleExpanded() {
     </div>
 
     <div v-if="expanded" class="members-panel">
+      <button
+        type="button"
+        class="capture-thumbnail-button"
+        :class="{ 'has-thumbnail': Boolean(thumbnailSrc) }"
+        :style="expandedButtonStyle"
+        aria-label="Capture party image"
+        @click.stop="onTapCaptureThumbnail"
+      >
+        <img
+          v-if="thumbnailSrc"
+          :src="thumbnailSrc"
+          alt="Party thumbnail"
+          class="capture-thumbnail-image"
+        />
+        <img v-else :src="cameraIconSrc" alt="" class="capture-thumbnail-icon" />
+      </button>
+
+      <CameraCapture
+        v-if="isCaptureOpen"
+        :group-id="String(groupId)"
+        :party-id="String(partyId)"
+        :has-thumbnail="Boolean(thumbnailSrc)"
+        @saved="onThumbnailSaved"
+        @removed="onThumbnailRemoved"
+        @close="onCloseCapture"
+      />
+
       <slot name="members"></slot>
     </div>
   </article>
@@ -149,5 +201,32 @@ function onToggleExpanded() {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+}
+
+.capture-thumbnail-button {
+  width: 200px;
+  height: 200px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  border-radius: calc(var(--radius-md) - 0.2rem);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.capture-thumbnail-button.has-thumbnail {
+  border-color: color-mix(in srgb, var(--brand) 30%, var(--line));
+}
+
+.capture-thumbnail-icon {
+  width: 5.25rem;
+  height: 5.25rem;
+}
+
+.capture-thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
