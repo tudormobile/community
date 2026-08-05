@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import appConfig from '@/assets/config.json'
 import usersAsset from '@/assets/users.json'
 import familyIcon from '@/assets/icons/family.svg'
+import userCheckIcon from '@/assets/icons/user_check.svg'
 import MemberRow from '@/components/MemberRow.vue'
 import PartyRow from '@/components/PartyRow.vue'
 import TravelGroupHeader from '@/components/TravelGroupHeader.vue'
+import { listThumbnails, type ThumbnailRecord } from '@/lib/thumbnailStore'
 import type { AppConfig } from '@/types/config'
 import type { EntityId, Member, Party, TravelGroup, UsersAsset } from '@/types/users'
 
@@ -73,6 +75,8 @@ function loadPersistedTravelGroups(): TravelGroup[] | null {
 }
 
 const travelGroups = ref<TravelGroup[]>(loadPersistedTravelGroups() ?? cloneTravelGroups(sourceGroups))
+const thumbnailSrcByPartyId = ref<Record<string, string>>({})
+let previousThumbnailObjectUrls: string[] = []
 
 function isValidGroupId(value: unknown): value is EntityId {
   return travelGroups.value.some((group) => group.id === value)
@@ -99,6 +103,7 @@ function loadPersistedSelectedGroupId(): EntityId | typeof ALL_GROUPS {
 }
 
 const selectedGroupId = ref<EntityId | typeof ALL_GROUPS>(loadPersistedSelectedGroupId())
+const showIncompleteOnly = ref(false)
 
 watch(
   travelGroups,
@@ -159,6 +164,19 @@ const visibleTravelGroups = computed<TravelGroup[]>(() => {
   return travelGroups.value.filter((group) => group.id === selectedGroupId.value)
 })
 
+const filteredVisibleTravelGroups = computed<TravelGroup[]>(() => {
+  if (!showIncompleteOnly.value) {
+    return visibleTravelGroups.value
+  }
+
+  return visibleTravelGroups.value
+    .map((group) => ({
+      ...group,
+      parties: group.parties.filter((party) => partyStatus(party) !== 'all'),
+    }))
+    .filter((group) => group.parties.length > 0)
+})
+
 function findParty(groupId: EntityId, partyId: EntityId): Party | null {
   const group = travelGroups.value.find((candidateGroup) => candidateGroup.id === groupId)
 
@@ -167,6 +185,37 @@ function findParty(groupId: EntityId, partyId: EntityId): Party | null {
   }
 
   return group.parties.find((candidateParty) => candidateParty.id === partyId) ?? null
+}
+
+function toThumbnailMap(rows: ThumbnailRecord[]): Record<string, string> {
+  for (const previousUrl of previousThumbnailObjectUrls) {
+    URL.revokeObjectURL(previousUrl)
+  }
+
+  previousThumbnailObjectUrls = []
+
+  const nextMap: Record<string, string> = {}
+
+  for (const row of rows) {
+    const objectUrl = URL.createObjectURL(row.blob)
+    previousThumbnailObjectUrls.push(objectUrl)
+    nextMap[row.partyId] = objectUrl
+  }
+
+  return nextMap
+}
+
+async function refreshPartyThumbnails() {
+  try {
+    const rows = await listThumbnails()
+    thumbnailSrcByPartyId.value = toThumbnailMap(rows)
+  } catch {
+    thumbnailSrcByPartyId.value = {}
+  }
+}
+
+function thumbnailSrcForParty(partyId: EntityId): string | null {
+  return thumbnailSrcByPartyId.value[String(partyId)] ?? null
 }
 
 function markPartyPresent(groupId: EntityId, partyId: EntityId) {
@@ -245,12 +294,39 @@ function resetGroup(groupId: EntityId) {
     })
   })
 }
+
+onMounted(async () => {
+  await refreshPartyThumbnails()
+})
+
+onBeforeUnmount(() => {
+  for (const previousUrl of previousThumbnailObjectUrls) {
+    URL.revokeObjectURL(previousUrl)
+  }
+
+  previousThumbnailObjectUrls = []
+})
 </script>
 
 <template>
   <main class="people-view">
     <header class="people-toolbar">
-      <button type="button" class="reset-button" @click="resetAttendance">RESET ALL</button>
+      <div class="toolbar-actions">
+        <button type="button" class="reset-button" @click="resetAttendance">RESET ALL</button>
+
+        <button
+          type="button"
+          class="group-filter-button incomplete-filter-button"
+          :class="{ active: showIncompleteOnly }"
+          :aria-pressed="showIncompleteOnly"
+          aria-label="Show only parties that are not fully checked off"
+          @click="showIncompleteOnly = !showIncompleteOnly"
+        >
+          <img :src="userCheckIcon" alt="" class="filter-icon" />
+          <span>Missing</span>
+        </button>
+      </div>
+
       <p class="global-total">{{ totalPresent }} / {{ totalMembers }}</p>
     </header>
 
@@ -276,7 +352,7 @@ function resetGroup(groupId: EntityId) {
       </button>
     </section>
 
-    <section v-for="group in visibleTravelGroups" :key="String(group.id)" class="travel-group">
+    <section v-for="group in filteredVisibleTravelGroups" :key="String(group.id)" class="travel-group">
       <TravelGroupHeader
         :name="group.name"
         :present-count="groupPresentCount(group)"
@@ -289,6 +365,7 @@ function resetGroup(groupId: EntityId) {
         <PartyRow
           v-for="party in group.parties"
           :key="`${String(group.id)}-${String(party.id)}`"
+          :party-id="party.id ?? ''"
           :name="party.name"
           :present-count="presentCount(party)"
           :total-count="memberCount(party)"
@@ -296,8 +373,11 @@ function resetGroup(groupId: EntityId) {
           :expanded="Boolean(party.expanded)"
           :expand-icon-src="familyIcon"
           :accent-color="config.theme.accent"
+          :thumbnail-src="thumbnailSrcForParty(party.id ?? '')"
           @tap-party="markPartyPresent(group.id ?? '', party.id ?? '')"
           @toggle-expanded="togglePartyExpanded(group.id ?? '', party.id ?? '')"
+          @thumbnail-saved="refreshPartyThumbnails"
+          @thumbnail-removed="refreshPartyThumbnails"
         >
           <template #members>
             <MemberRow
@@ -326,6 +406,13 @@ function resetGroup(groupId: EntityId) {
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .reset-button {
@@ -357,6 +444,17 @@ function resetGroup(groupId: EntityId) {
   min-height: 2.2rem;
   padding: 0.4rem 0.75rem;
   white-space: nowrap;
+}
+
+.incomplete-filter-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.filter-icon {
+  width: 1rem;
+  height: 1rem;
 }
 
 .group-filter-button.active {

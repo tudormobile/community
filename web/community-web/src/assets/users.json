@@ -6,7 +6,7 @@
             "parties": [
                 {
                     "id": 1,
-                    "name": "Party Baker",
+                    "name": "Baker",
                     "members": [
                         {
                             "name": "LISAMARY BAKER",
@@ -20,7 +20,7 @@
                 },
                 {
                     "id": 2,
-                    "name": "Party Butler",
+                    "name": "Butler",
                     "members": [
                         {
                             "name": "PATRICKJOSEPH BUTLER",
@@ -30,7 +30,7 @@
                 },
                 {
                     "id": 3,
-                    "name": "Party Callaghan",
+                    "name": "Callaghan",
                     "members": [
                         {
                             "name": "ELIZABETHMARY CALLAGHAN",
@@ -40,7 +40,7 @@
                 },
                 {
                     "id": 4,
-                    "name": "Party Casey",
+                    "name": "Casey",
                     "members": [
                         {
                             "name": "PAULDAVID CASEY",
@@ -54,7 +54,7 @@
                 },
                 {
                     "id": 5,
-                    "name": "Party Clarke",
+                    "name": "Clarke",
                     "members": [
                         {
                             "name": "NEILFRANCIS CLARKE",
@@ -68,7 +68,7 @@
                 },
                 {
                     "id": 6,
-                    "name": "Party Dean",
+                    "name": "Dean",
                     "members": [
                         {
                             "name": "MICHAELTHOMAS DEAN",
@@ -82,7 +82,7 @@
                 },
                 {
                     "id": 7,
-                    "name": "Party Delude",
+                    "name": "Delude",
                     "members": [
                         {
                             "name": "MARIEA DELUDE",
@@ -92,7 +92,7 @@
                 },
                 {
                     "id": 8,
-                    "name": "Party Gordon",
+                    "name": "Gordon",
                     "members": [
                         {
                             "name": "FREDRICKA GORDON",
@@ -102,7 +102,7 @@
                 },
                 {
                     "id": 9,
-                    "name": "Party Kaiser",
+                    "name": "Kaiser",
                     "members": [
                         {
                             "name": "FRANCINELINDA KAISER",
@@ -112,7 +112,7 @@
                 },
                 {
                     "id": 10,
-                    "name": "Party Kania",
+                    "name": "Kania",
                     "members": [
                         {
                             "name": "CHARLESJOHN KANIA",
@@ -126,7 +126,7 @@
                 },
                 {
                     "id": 11,
-                    "name": "Party Kasky",
+                    "name": "Kasky",
                     "members": [
                         {
                             "name": "APRILJENNIFERIRWIN KASKY",
@@ -148,7 +148,7 @@
                 },
                 {
                     "id": 12,
-                    "name": "Party Kelts",
+                    "name": "Kelts",
                     "members": [
                         {
                             "name": "MARYANNTHERESE KELTS",
@@ -158,7 +158,7 @@
                 },
                 {
                     "id": 13,
-                    "name": "Party Kerin",
+                    "name": "Kerin",
                     "members": [
                         {
                             "name": "CHRISTADENISE KERIN",
@@ -168,7 +168,7 @@
                 },
                 {
                     "id": 14,
-                    "name": "Party Ketcham",
+                    "name": "Ketcham",
                     "members": [
                         {
                             "name": "KARENMARIE KETCHAM",
@@ -178,7 +178,7 @@
                 },
                 {
                     "id": 15,
-                    "name": "Party Kile",
+                    "name": "Kile",
                     "members": [
                         {
                             "name": "SUSANMARY KILE",
@@ -188,7 +188,7 @@
                 },
                 {
                     "id": 16,
-                    "name": "Party Mills",
+                    "name": "Mills",
                     "members": [
                         {
                             "name": "ELAINEMARY MILLS",
@@ -198,7 +198,7 @@
                 },
                 {
                     "id": 17,
-                    "name": "Party Minnear",
+                    "name": "Minnear",
                     "members": [
                         {
                             "name": "WILLIAMPAUL MINNEAR",
@@ -212,7 +212,7 @@
                 },
                 {
                     "id": 18,
-                    "name": "Party Newton",
+                    "name": "Newton",
                     "members": [
                         {
                             "name": "MARILYN NEWTON",
@@ -226,7 +226,7 @@
                 },
                 {
                     "id": 19,
-                    "name": "Party Obrien",
+                    "name": "Obrien",
                     "members": [
                         {
                             "name": "MAURAE OBRIEN",
@@ -236,7 +236,7 @@
                 },
                 {
                     "id": 20,
-                    "name": "Party Schabinger",
+                    "name": "Schabinger",
                     "members": [
                         {
                             "name": "JOANNEM SCHABINGER",
@@ -246,7 +246,7 @@
                 },
                 {
                     "id": 21,
-                    "name": "Party Tudor",
+                    "name": "Tudor",
                     "members": [
                         {
                             "name": "WILLIAMHAROLD TUDOR",
@@ -260,7 +260,7 @@
                 },
                 {
                     "id": 22,
-                    "name": "Party Vandawalker",
+                    "name": "Vandawalker",
                     "members": [
                         {
                             "name": "PAMELAANN VANDAWALKER",
@@ -270,7 +270,7 @@
                 },
                 {
                     "id": 23,
-                    "name": "Party Wilson",
+                    "name": "Wilson",
                     "members": [
                         {
                             "name": "SUSANJANE WILSON",
@@ -290,7 +290,7 @@
             "parties": [
                 {
                     "id": 3,
-                    "name": "Party 3",
+                    "name": "3",
                     "members": [
                         {
                             "name": "Member 5",
@@ -304,7 +304,7 @@
                 },
                 {
                     "id": 4,
-                    "name": "Party 4",
+                    "name": "4",
                     "members": [
                         {
                             "name": "Member 7",
