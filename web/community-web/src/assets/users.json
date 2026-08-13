@@ -2,7 +2,7 @@
     "travelGroups": [
         {
             "id": 1,
-            "name": "Travel Group 1",
+            "name": "Group A",
             "parties": [
                 {
                     "id": 1,
@@ -286,7 +286,7 @@
         },
         {
             "id": 2,
-            "name": "Travel Group 2",
+            "name": "Group B",
             "parties": [
                 {
                     "id": 3,
