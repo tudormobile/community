@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import ItemsToggle from '@/components/ItemsToggle.vue'
 import Calendar from '@/components/Calendar.vue'
 import EventList from '@/components/EventList.vue'
+import UpcomingEvent from '@/components/UpcomingEvent.vue'
 import calendarIcon from '@/assets/icons/calendar_month.svg'
 import listIcon from '@/assets/icons/list.svg'
 import allEventsData from '@/assets/events.json'
@@ -24,12 +25,30 @@ const allEvents = ref<CalendarEvent[]>(
 )
 const viewMode = ref<'first' | 'second'>('first')
 
+const currentOrNextEvent = computed<CalendarEvent | null>(() => {
+  const now = new Date()
+  const today = allEvents.value.filter((event) => {
+    return event.start.getFullYear() === now.getFullYear()
+      && event.start.getMonth() === now.getMonth()
+      && event.start.getDate() === now.getDate()
+  }).sort((first, second) => first.start.getTime() - second.start.getTime())[0]
+
+  if (today) return today
+
+  return allEvents.value
+    .filter((event) => event.start >= now)
+    .sort((first, second) => first.start.getTime() - second.start.getTime())[0] ?? null
+})
+
 </script>
 <template>
   <main class="events">
     <ItemsToggle v-model="viewMode" first-label="Calendar" second-label="Events" :first-icon="calendarIcon" :second-icon="listIcon" />
     <section class="events-content">
-      <Calendar v-if="viewMode === 'first'" :events="allEvents" />
+      <template v-if="viewMode === 'first'">
+        <Calendar :events="allEvents" />
+        <UpcomingEvent :event="currentOrNextEvent" />
+      </template>
       <EventList v-else :events="allEvents" />
       <!--       TODO: add event details view/modal when an event is selected "EventList :events="allEvents" @select="selectedEvent = $event"
  -->
