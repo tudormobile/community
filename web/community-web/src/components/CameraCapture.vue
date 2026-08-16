@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, ref } from 'vue'
-import { removeThumbnail, saveThumbnail, type ThumbnailShape } from '@/lib/thumbnailStore'
+import { nextTick, onBeforeUnmount, ref } from 'vue'
+import { removeThumbnail, saveThumbnail } from '@/lib/thumbnailStore'
 
 const props = defineProps<{
   groupId: string
@@ -16,15 +16,13 @@ const emit = defineEmits<{
 
 const TARGET_SIZE = 400
 
+const captureShell = ref<HTMLElement | null>(null)
 const videoElement = ref<HTMLVideoElement | null>(null)
 const stream = ref<MediaStream | null>(null)
 const isStreaming = ref(false)
 const isSaving = ref(false)
 const isRemoving = ref(false)
 const errorMessage = ref('')
-const shape = ref<ThumbnailShape>('square')
-
-const shapeLabel = computed(() => (shape.value === 'circle' ? 'Circular' : 'Square'))
 
 const stopStream = () => {
   if (!stream.value) {
@@ -87,16 +85,17 @@ const startCamera = async () => {
       videoElement.value.srcObject = media
       await videoElement.value.play()
     }
+
+    await nextTick()
+    window.requestAnimationFrame(() => {
+      captureShell.value?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
   } catch (error) {
     errorMessage.value =
       error instanceof Error
         ? error.message
         : 'Camera permission denied or no camera available on this device.'
   }
-}
-
-const toggleShape = () => {
-  shape.value = shape.value === 'circle' ? 'square' : 'circle'
 }
 
 const captureBlob = async (): Promise<Blob> => {
@@ -141,13 +140,6 @@ const captureBlob = async (): Promise<Blob> => {
 
   context.clearRect(0, 0, TARGET_SIZE, TARGET_SIZE)
 
-  if (shape.value === 'circle') {
-    context.beginPath()
-    context.arc(TARGET_SIZE / 2, TARGET_SIZE / 2, TARGET_SIZE / 2, 0, Math.PI * 2)
-    context.closePath()
-    context.clip()
-  }
-
   context.drawImage(video, sourceX, sourceY, sourceSize, sourceSize, 0, 0, TARGET_SIZE, TARGET_SIZE)
 
   return await new Promise((resolve, reject) => {
@@ -172,7 +164,7 @@ const captureAndSave = async () => {
 
   try {
     const blob = await captureBlob()
-    await saveThumbnail(props.groupId, props.partyId, blob, shape.value)
+    await saveThumbnail(props.groupId, props.partyId, blob, 'square')
     stopStream()
     emit('saved')
     emit('close')
@@ -210,17 +202,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="capture-shell" aria-label="Thumbnail capture">
+  <section ref="captureShell" class="capture-shell" aria-label="Thumbnail capture">
     <div class="controls-row">
       <button v-if="!isStreaming" type="button" @click="startCamera">Start Camera</button>
       <template v-else>
         <button type="button" :disabled="isSaving || isRemoving" @click="captureAndSave">
-          Capture {{ shapeLabel }}
+          Capture
         </button>
-        <button type="button" :disabled="isSaving || isRemoving" @click="toggleShape">
-          Use {{ shape === 'circle' ? 'Square' : 'Circle' }}
-        </button>
-        <button type="button" :disabled="isSaving || isRemoving" @click="stopStream">Stop Camera</button>
       </template>
 
       <button
@@ -240,7 +228,7 @@ onBeforeUnmount(() => {
 
     <div v-if="isStreaming" class="video-stage">
       <video ref="videoElement" autoplay playsinline muted></video>
-      <div class="overlay" :class="shape" aria-hidden="true"></div>
+      <div class="overlay" aria-hidden="true"></div>
     </div>
   </section>
 </template>
@@ -290,10 +278,6 @@ video {
   border: 2px solid #ffffff;
   box-shadow: 0 0 0 9999px rgb(0 0 0 / 0.35);
   pointer-events: none;
-}
-
-.overlay.circle {
-  border-radius: 50%;
 }
 
 .remove-button {

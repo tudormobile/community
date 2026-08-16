@@ -89,6 +89,8 @@ function onThumbnailRemoved() {
     </div>
 
     <div v-if="expanded" class="members-panel">
+      <slot name="members"></slot>
+
       <button
         type="button"
         class="capture-thumbnail-button"
@@ -115,8 +117,6 @@ function onThumbnailRemoved() {
         @removed="onThumbnailRemoved"
         @close="onCloseCapture"
       />
-
-      <slot name="members"></slot>
     </div>
   </article>
 </template>
