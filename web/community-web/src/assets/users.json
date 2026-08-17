@@ -2,282 +2,304 @@
     "travelGroups": [
         {
             "id": 1,
-            "name": "Group A",
+            "name": "Navy",
             "parties": [
                 {
                     "id": 1,
-                    "name": "Baker",
+                    "name": "Albanese / Danielski (Dom/Gerry)",
                     "members": [
                         {
-                            "name": "LISAMARY BAKER",
+                            "name": "Dominick",
                             "present": false
                         },
                         {
-                            "name": "RAYMONDEARL BAKERJR",
+                            "name": "Gerald",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 2,
-                    "name": "Butler",
+                    "name": "Arce / Twinam (Monse/Pat)",
                     "members": [
                         {
-                            "name": "PATRICKJOSEPH BUTLER",
+                            "name": "Monserrate",
+                            "present": false
+                        },
+                        {
+                            "name": "Patricia",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 3,
-                    "name": "Callaghan",
+                    "name": "Benoit / Smith (Debby/Rhonda)",
                     "members": [
                         {
-                            "name": "ELIZABETHMARY CALLAGHAN",
+                            "name": "Deborah",
+                            "present": false
+                        },
+                        {
+                            "name": "Rhonda",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 4,
-                    "name": "Casey",
+                    "name": "Casey (Paul & Abigail)",
                     "members": [
                         {
-                            "name": "PAULDAVID CASEY",
+                            "name": "Paul",
                             "present": false
                         },
                         {
-                            "name": "ABIGAILOSTRANDER CASEY",
+                            "name": "Abigail",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 5,
-                    "name": "Clarke",
+                    "name": "Davis / Ryan (Carole/Cheryl)",
                     "members": [
                         {
-                            "name": "NEILFRANCIS CLARKE",
+                            "name": "Carole",
                             "present": false
                         },
                         {
-                            "name": "BARBARAJEAN CLARKE",
+                            "name": "Cheryl",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 6,
-                    "name": "Dean",
+                    "name": "Duclos (Steve & Mary)",
                     "members": [
                         {
-                            "name": "MICHAELTHOMAS DEAN",
+                            "name": "Steven",
                             "present": false
                         },
                         {
-                            "name": "JANISLYNN DEAN",
+                            "name": "Mary",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 7,
-                    "name": "Delude",
+                    "name": "Edmundson (Paul & Linda)",
                     "members": [
                         {
-                            "name": "MARIEA DELUDE",
+                            "name": "Paul",
+                            "present": false
+                        },
+                        {
+                            "name": "Linda",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 8,
-                    "name": "Gordon",
+                    "name": "Egan (Mary)",
                     "members": [
                         {
-                            "name": "FREDRICKA GORDON",
+                            "name": "Mary",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 9,
-                    "name": "Kaiser",
+                    "name": "Hebert (Carl & Jeanne)",
                     "members": [
                         {
-                            "name": "FRANCINELINDA KAISER",
+                            "name": "Carl",
+                            "present": false
+                        },
+                        {
+                            "name": "Jeanne",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 10,
-                    "name": "Kania",
+                    "name": "Kania (Chuck & Dorothy)",
                     "members": [
                         {
-                            "name": "CHARLESJOHN KANIA",
+                            "name": "Charles",
                             "present": false
                         },
                         {
-                            "name": "DOROTHYHENRIETTA KANIA",
+                            "name": "Dorothy",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 11,
-                    "name": "Kasky",
+                    "name": "Kasky (Emily & Margaret)",
                     "members": [
                         {
-                            "name": "APRILJENNIFERIRWIN KASKY",
+                            "name": "Emily",
                             "present": false
                         },
                         {
-                            "name": "EMILYANN KASKY",
-                            "present": false
-                        },
-                        {
-                            "name": "MARGARETMARY KASKY",
-                            "present": false
-                        },
-                        {
-                            "name": "ROBERTJOHN KASKYIII",
+                            "name": "Margaret",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 12,
-                    "name": "Kelts",
+                    "name": "Kosier (Millicent)",
                     "members": [
                         {
-                            "name": "MARYANNTHERESE KELTS",
+                            "name": "Millicent",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 13,
-                    "name": "Kerin",
+                    "name": "Krylowicz / Ewing (Cathy/Judy)",
                     "members": [
                         {
-                            "name": "CHRISTADENISE KERIN",
+                            "name": "Catherine",
+                            "present": false
+                        },
+                        {
+                            "name": "Judith",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 14,
-                    "name": "Ketcham",
+                    "name": "McHugh (Tom & Barbara)",
                     "members": [
                         {
-                            "name": "KARENMARIE KETCHAM",
+                            "name": "Thomas",
+                            "present": false
+                        },
+                        {
+                            "name": "Barbara",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 15,
-                    "name": "Kile",
+                    "name": "O'Donnell / Carson (Carolyn/Margaret)",
                     "members": [
                         {
-                            "name": "SUSANMARY KILE",
+                            "name": "Carolyn",
+                            "present": false
+                        },
+                        {
+                            "name": "Margaret",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 16,
-                    "name": "Mills",
+                    "name": "Pilch (Robert & Shirley)",
                     "members": [
                         {
-                            "name": "ELAINEMARY MILLS",
+                            "name": "Robert",
+                            "present": false
+                        },
+                        {
+                            "name": "Shirley",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 17,
-                    "name": "Minnear",
+                    "name": "Silvia / Silvia (Alan & Learay)",
                     "members": [
                         {
-                            "name": "WILLIAMPAUL MINNEAR",
+                            "name": "Alan",
                             "present": false
                         },
                         {
-                            "name": "CHRISTINEMAURA MINNEAR",
+                            "name": "Learay",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 18,
-                    "name": "Newton",
+                    "name": "Simpkins (Mark & Lorraine)",
                     "members": [
                         {
-                            "name": "MARILYN NEWTON",
+                            "name": "Mark",
                             "present": false
                         },
                         {
-                            "name": "HEATHERMARIE NEWTON",
+                            "name": "Lorraine",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 19,
-                    "name": "Obrien",
+                    "name": "Smith / Doherty (Barbara/Joanne)",
                     "members": [
                         {
-                            "name": "MAURAE OBRIEN",
+                            "name": "Barbara",
+                            "present": false
+                        },
+                        {
+                            "name": "Joanne",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 20,
-                    "name": "Schabinger",
+                    "name": "Tudor (Bill & Nancy)",
                     "members": [
                         {
-                            "name": "JOANNEM SCHABINGER",
+                            "name": "William",
+                            "present": false
+                        },
+                        {
+                            "name": "Nancy",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 21,
-                    "name": "Tudor",
+                    "name": "Valenti (Steve & Laurie)",
                     "members": [
                         {
-                            "name": "WILLIAMHAROLD TUDOR",
+                            "name": "Stephen",
                             "present": false
                         },
                         {
-                            "name": "NANCYMARIE TUDOR",
+                            "name": "Laurie",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 22,
-                    "name": "Vandawalker",
+                    "name": "Walsh / O'Brien (Margaret/Maura)",
                     "members": [
                         {
-                            "name": "PAMELAANN VANDAWALKER",
-                            "present": false
-                        }
-                    ]
-                },
-                {
-                    "id": 23,
-                    "name": "Wilson",
-                    "members": [
-                        {
-                            "name": "SUSANJANE WILSON",
+                            "name": "Margaret",
                             "present": false
                         },
                         {
-                            "name": "WILLIAMJOHN WILSONJR",
+                            "name": "Maura",
                             "present": false
                         }
                     ]
@@ -286,32 +308,260 @@
         },
         {
             "id": 2,
-            "name": "Group B",
+            "name": "White",
             "parties": [
                 {
-                    "id": 3,
-                    "name": "3",
+                    "id": 1,
+                    "name": "Desroches / Hughes",
                     "members": [
                         {
-                            "name": "Member 5",
+                            "name": "Dawn",
                             "present": false
                         },
                         {
-                            "name": "Member 6",
+                            "name": "Dianne",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "name": "Marchand / Huber",
+                    "members": [
+                        {
+                            "name": "Diane",
+                            "present": false
+                        },
+                        {
+                            "name": "Phyllis",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "name": "Mastrianni / Cai",
+                    "members": [
+                        {
+                            "name": "Paul",
+                            "present": false
+                        },
+                        {
+                            "name": "Chanhui",
                             "present": false
                         }
                     ]
                 },
                 {
                     "id": 4,
-                    "name": "4",
+                    "name": "Mazzarelli Jr. / Mazzarelli",
                     "members": [
                         {
-                            "name": "Member 7",
+                            "name": "Francis",
                             "present": false
                         },
                         {
-                            "name": "Member 8",
+                            "name": "Carla",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "name": "McGrath",
+                    "members": [
+                        {
+                            "name": "Carol",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "name": "Montgomery / Maciejewski",
+                    "members": [
+                        {
+                            "name": "Monika",
+                            "present": false
+                        },
+                        {
+                            "name": "Susan",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "name": "Read",
+                    "members": [
+                        {
+                            "name": "John",
+                            "present": false
+                        },
+                        {
+                            "name": "Rene",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "Rockwood / Kelly",
+                    "members": [
+                        {
+                            "name": "Anne",
+                            "present": false
+                        },
+                        {
+                            "name": "Shannon",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "name": "Rogers / Pangilinan",
+                    "members": [
+                        {
+                            "name": "Maria",
+                            "present": false
+                        },
+                        {
+                            "name": "Maria Belen",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "name": "Russell",
+                    "members": [
+                        {
+                            "name": "Robert",
+                            "present": false
+                        },
+                        {
+                            "name": "Veronica",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "name": "Ryan",
+                    "members": [
+                        {
+                            "name": "Dennis",
+                            "present": false
+                        },
+                        {
+                            "name": "Susan",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "name": "Ryan",
+                    "members": [
+                        {
+                            "name": "Patrick Jr.",
+                            "present": false
+                        },
+                        {
+                            "name": "Patrick",
+                            "present": false
+                        },
+                        {
+                            "name": "Monica",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 13,
+                    "name": "Schabinger / Ketcham",
+                    "members": [
+                        {
+                            "name": "Joanne",
+                            "present": false
+                        },
+                        {
+                            "name": "Karen",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 14,
+                    "name": "Seel",
+                    "members": [
+                        {
+                            "name": "Richard",
+                            "present": false
+                        },
+                        {
+                            "name": "Denise",
+                            "present": false
+                        },
+                        {
+                            "name": "Timothy",
+                            "present": false
+                        },
+                        {
+                            "name": "Kathleen",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 16,
+                    "name": "Sekellick",
+                    "members": [
+                        {
+                            "name": "Mary Ann",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 17,
+                    "name": "Sokolowski / Cranker",
+                    "members": [
+                        {
+                            "name": "Benita",
+                            "present": false
+                        },
+                        {
+                            "name": "Theresa",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 18,
+                    "name": "Sowalsky / Pastor",
+                    "members": [
+                        {
+                            "name": "Jan",
+                            "present": false
+                        },
+                        {
+                            "name": "Marie",
+                            "present": false
+                        }
+                    ]
+                },
+                {
+                    "id": 19,
+                    "name": "Terranova / Jones",
+                    "members": [
+                        {
+                            "name": "Concetta",
+                            "present": false
+                        },
+                        {
+                            "name": "Kathleen",
                             "present": false
                         }
                     ]
