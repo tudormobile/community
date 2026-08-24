@@ -32,12 +32,14 @@ const handleInput = (e: Event) => {
 
       <div class="divider"></div>
 
-      <button type="button" @click="emit('add')" class="add-button">
+      <!-- Remove the add button for now, since we don't have a way to add events yet. -->
+      <!-- <button type="button" @click="emit('add')" class="add-button">
         <div class="add-icon-wrapper">
           <img class="add-icon" :src="AddPin" aria-hidden="true" alt="Add" />
         </div>
         <span class="add-label">Add</span>
-      </button>
+      </button> -->
+      <!-- End Remove -->
     </div>
   </div>
 </template>

@@ -1,0 +1,31 @@
+{
+  "name": "Community App",
+  "short_name": "Community",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#edfdf5",
+  "theme_color": "#15803d",
+  "icons": [
+    {
+      "src": "/app_icon_58.png",
+      "sizes": "58x58",
+      "type": "image/png"
+    },
+    {
+      "src": "/app_icon_152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/app_icon_167.png",
+      "sizes": "167x167",
+      "type": "image/png"
+    },
+    {
+      "src": "/app_icon_180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

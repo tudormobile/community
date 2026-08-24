@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Athens Hotel Check-in",
+    "content": "ATHENS MARRIOTT TEL: 30-210-947-1000\n385, Syngrou Avenue.\n175 64 Athens GREECE",
+    "date": "2026-09-22"
+  },
+  {
+    "id": 2,
+    "title": "SHIP: Discovery Celestyal Cruise Lines",
+    "content": "DISCOVERY CELESTYAL CRUISE LINES TEL: 30-210-947-1000\nPiraeus Port\n185 38 Athens GREECE",
+    "date": "2026-09-22"
+  },
+  {
+    "id": 3,
+    "title": "HOTEL METEORA, Kalambaka",
+    "content": "Ploutarchou, 11\n42200 Kalambaka\nTEL: 30-2432-22367/29\nKalambaka, Greece",
+    "date": "2026-09-22"
+  },
+  {
+    "id": 4,
+    "title": "THESSALONIKI HOLIDAY INN",
+    "content": "Monastir 8\n54629 Thessaloniki GREECE\nTHESSALONIKI HOLIDAY INN TEL: 30-2310-5631003\nThessaloniki, Greece",
+    "date": "2026-09-22"
+  },
+  {
+    "id": 5,
+    "title": "DOLCE ATTICA",
+    "content": "DOLCE ATTICA TEL: 30-22940 71000\nVravronos Avenue\nGR 19016 Vravrona GREECE",
+    "date": "2026-09-22"
+  }
+]

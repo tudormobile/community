@@ -22,12 +22,13 @@ const props = withDefaults(
     height?: string
   }>(),
   {
-    zoom: 14,
+    zoom: 7,
     height: '32rem',
   },
 )
 
-const defaultCenter: [number, number] = [42.845879, -73.829161]
+//const defaultCenter: [number, number] = [42.845879, -73.829161] // Clifton Park, NY
+const defaultCenter: [number, number] = [37.983810, 23.728039] // Athens, Greece
 const markerIcon = shallowRef<Icon | null>(null)
 let controlsInitialized = false
 
@@ -171,8 +172,8 @@ async function onMapReady(map: LeafletMap) {
   justify-content: center;
 }
 :deep(.leaflet-control-locate) {
-  --locate-control-icon-color: #16a34a;
-  --locate-control-active-color: #15803d;
-  --locate-control-following-color: #22c55e;
+  --locate-control-icon-color: var(--brand);
+  --locate-control-active-color: var(--brand-strong);
+  --locate-control-following-color: var(--brand-strong);
 }
 </style>

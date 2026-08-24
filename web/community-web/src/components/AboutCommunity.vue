@@ -14,7 +14,7 @@ const version = import.meta.env.VITE_APP_VERSION || pkgVersion
         <div style="display: flex; flex-direction: row; align-items: center;">
             <span><img :src="logoIcon" class="logo" alt="" /></span>
             <div style="display: flex; flex-direction: column; gap: 0.0rem; margin-left: 0.5rem;">
-            <div class="title">{{ appName }} v{{ pkgVersion }}</div>
+            <div class="title">{{ appName }} v{{ version }}</div>
             <div class="subtitle">{{ AppCopyright }}</div>
             <div class="subtitle">License: {{ AppLicense }}</div>
         </div>

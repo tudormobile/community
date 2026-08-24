@@ -119,7 +119,7 @@ async function enrichMarkerTitlesInBackground() {
 }
 
 onMounted(() => {
-  void enrichMarkerTitlesInBackground()
+  //void enrichMarkerTitlesInBackground()
 })
 
 function handleAddEvent() {

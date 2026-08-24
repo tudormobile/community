@@ -7,6 +7,7 @@ import homeIcon from '@/assets/icons/home.svg'
 import mapIcon from '@/assets/icons/map.svg'
 import infoIcon from '@/assets/icons/info.svg'
 import calendarIcon from '@/assets/icons/calendar_month.svg'
+import userCheckIcon from '@/assets/icons/user_check.svg'
 
 const version = import.meta.env.VITE_APP_VERSION || pkgVersion
 const route = useRoute()
@@ -30,6 +31,10 @@ const route = useRoute()
       <RouterLink to="/home" class="tab-item">
         <img :src="homeIcon" class="tab-icon" alt="" />
         <span class="tab-label">Home</span>
+      </RouterLink>
+      <RouterLink to="/people" class="tab-item">
+        <img :src="userCheckIcon" class="tab-icon" alt="" />
+        <span class="tab-label">People</span>
       </RouterLink>
       <RouterLink to="/events" class="tab-item">
         <img :src="calendarIcon" class="tab-icon" alt="" />
@@ -189,7 +194,8 @@ const route = useRoute()
 .tab-item.router-link-active .tab-icon {
   transform: translateY(-1px);
   opacity: 1;
-  filter: invert(38%) sepia(72%) saturate(500%) hue-rotate(140deg) brightness(90%);
+  filter: brightness(0) saturate(100%) invert(8%) sepia(24%) saturate(4420%) hue-rotate(199deg) brightness(90%) contrast(96%);
+  /* filter: invert(38%) sepia(72%) saturate(500%) hue-rotate(140deg) brightness(90%); */
 }
 
 .app-footer {

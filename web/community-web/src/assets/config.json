@@ -1,16 +1,16 @@
 {
-  "name": "Giveaway",
-  "tagline": "Clifton Park Giveaway Weekend - Give your stuff new life!",
-  "logoUrl": "https://cliftonparkny.gov/images/logo/logo_cropped.png",
-  "itemName": "Stuff",
-  "description": "This is the fourth annual Clifton Park Giveaway weekend (April 17-19, 2026). Use the 'Items' tab to view the giveaway map and items list.",
+  "name": "Trip",
+  "tagline": "St. Edwards Greece 2026",
+  "logoUrl": "https://irp.cdn-website.com/e6dadef7/dms3rep/multi/opt/SECCC_Logo_IconOnly-237w.png",
+  "itemName": "Locations",
+  "description": "Greece and the Greek Isles (11 DAYS) SEPTEMBER 22 - OCTOBER 2, 2026 visiting ATHENS * CORINTH * MYKONOS * EPHESUS * PATMOS * CRETE * SANTORINI * DELPHI * KALAMBAKA * THESSALONIKI * including a 3-day cruise to the GREEK ISLES and TURKEY.",
   "homeLocation": {
-    "adr": "Clifton Park, NY",
-    "lat": 42.85906441954508,
-    "lng": -73.81971101464801
+    "adr": "Athens, Greece",
+    "lat": 37.983810,
+    "lng": 23.728039
   },
   "theme": {
-    "primary": "#22c55e",
+    "primary": "#122950",
     "secondary": "#15803d",
     "accent": "#f59e0b"
   }

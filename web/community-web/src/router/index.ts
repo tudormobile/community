@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/items',
+      redirect: '/people',  // We always want to start on the people page, so redirect to that route
     },
     {
       path: '/home',
@@ -13,6 +13,11 @@ const router = createRouter({
       component: () => import('../views/HomeView.vue'),
     },
     {
+      path: '/people',
+      name: 'people',
+      component: () => import('../views/PeopleView.vue'),
+    },
+   {
       path: '/events',
       name: 'events',
       component: () => import('../views/EventsView.vue'),
