@@ -48,11 +48,56 @@ function cloneTravelGroups(groups: TravelGroup[]): TravelGroup[] {
   })
 }
 
+function reconcilePersistedTravelGroups(source: TravelGroup[], persisted: TravelGroup[]): TravelGroup[] {
+  const currentGroups = cloneTravelGroups(source)
+  const persistedGroups = cloneTravelGroups(persisted)
+
+  for (const currentGroup of currentGroups) {
+    const persistedGroup = persistedGroups.find((group) => group.id === currentGroup.id)
+
+    if (!persistedGroup) {
+      continue
+    }
+
+    for (const currentParty of currentGroup.parties) {
+      const persistedParty = persistedGroup.parties.find((party) => party.id === currentParty.id)
+
+      if (!persistedParty) {
+        continue
+      }
+
+      currentParty.expanded = Boolean(persistedParty.expanded)
+
+      for (const currentMember of currentParty.members) {
+        const persistedMember = persistedParty.members.find((member) => member.id === currentMember.id)
+
+        if (persistedMember) {
+          currentMember.present = Boolean(persistedMember.present)
+        }
+      }
+    }
+  }
+
+  return currentGroups
+}
+
 const sourceGroups = (usersAsset as UsersAsset).travelGroups
 const config = appConfig as AppConfig
 const STORAGE_KEY = 'community-web.people.attendance.v1'
 const SELECTED_GROUP_STORAGE_KEY = 'community-web.people.selected-group.v1'
 const ALL_GROUPS = 'all'
+
+function persistLocalStorage(key: string, value: unknown) {
+  try {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    window.localStorage.setItem(key, JSON.stringify(value))
+  } catch {
+    // Persistence is optional; the in-memory state remains usable.
+  }
+}
 
 function loadPersistedTravelGroups(): TravelGroup[] | null {
   try {
@@ -68,13 +113,18 @@ function loadPersistedTravelGroups(): TravelGroup[] | null {
       return null
     }
 
-    return cloneTravelGroups(parsed as TravelGroup[])
+    return reconcilePersistedTravelGroups(sourceGroups, parsed as TravelGroup[])
   } catch {
     return null
   }
 }
 
-const travelGroups = ref<TravelGroup[]>(loadPersistedTravelGroups() ?? cloneTravelGroups(sourceGroups))
+const persistedTravelGroups = loadPersistedTravelGroups()
+const travelGroups = ref<TravelGroup[]>(persistedTravelGroups ?? cloneTravelGroups(sourceGroups))
+
+if (persistedTravelGroups) {
+  persistLocalStorage(STORAGE_KEY, persistedTravelGroups)
+}
 const thumbnailSrcByThumbnailId = ref<Record<string, string>>({})
 let previousThumbnailObjectUrls: string[] = []
 
@@ -108,13 +158,13 @@ const showIncompleteOnly = ref(false)
 watch(
   travelGroups,
   (groups) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(groups))
+    persistLocalStorage(STORAGE_KEY, groups)
   },
   { deep: true }
 )
 
 watch(selectedGroupId, (value) => {
-  localStorage.setItem(SELECTED_GROUP_STORAGE_KEY, JSON.stringify(value))
+  persistLocalStorage(SELECTED_GROUP_STORAGE_KEY, value)
 })
 
 function memberCount(party: Party): number {
